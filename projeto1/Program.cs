@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+
 
 namespace Jogo18Ghosts
 {
@@ -6,22 +8,14 @@ namespace Jogo18Ghosts
     {
         static void Main(string[] args)
         {
-            string userMoveChoice = Console.ReadLine();
-            string userMoveChoiceLowCase = userMoveChoice.ToLower();
-            
-            //string moveUp, moveDown, moveLeft, moveRight;
 
-            if (userMoveChoiceLowCase == "up")
-            {
-                Console.WriteLine("HEHHEE");
-              
-            }
-            else
-            {
-                Console.WriteLine("HAHAHAHAHAH LOSER");
-            }
+            Console.OutputEncoding = Encoding.UTF8;
+            GameBoard board;
 
-            Console.ReadKey();
+            board = new GameBoard();
+
+            board.Board();
+
 
         }
     }
