@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
+    //Defenir variaveis
 
+
+    // Saber se dois fantasmas estao na mesma casa
+
+
+    // Ver qual a cor de cada um 
     public abstract class Players
     {
         public string Name { get; set; }
@@ -42,6 +48,9 @@ namespace Jogo18Ghosts
         Red
     }
 
+
+    // Saber os resultados
+
     public class Battle
     {
         private readonly Players _player1;
@@ -70,6 +79,10 @@ namespace Jogo18Ghosts
 
             return null;
         }
+
+
+        // Resolfer o comflicto
+
         private GameAction? WinningHand(GameAction p1, GameAction p2)
         {
             //P1 wins with yellow
@@ -114,14 +127,3 @@ namespace Jogo18Ghosts
 
     }
 }
-/*namespace Jogo18Ghosts
-{
-    class GamePlay
-    {
-        // ----------> Instances <---------- //
-
-        // ----------> Constructors <---------- //
-
-        // ----------> Functions <---------- //
-    
-}*/

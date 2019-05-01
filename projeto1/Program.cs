@@ -6,6 +6,8 @@ namespace Jogo18Ghosts
     {
         private static void Main(string[] args)
         {
+
+            //Asks Player Names
             Console.WriteLine("Tell me your names Player 1, Player 2.");
 
             var player1 = new PlayerYellow()
@@ -19,6 +21,9 @@ namespace Jogo18Ghosts
                 Name = Console.ReadLine()
             };
 
+
+
+            //Prints who Won and who can interact with who 
             var winner = new Battle(player1, player2).PlayMatchUp();
 
             if (winner == null)
