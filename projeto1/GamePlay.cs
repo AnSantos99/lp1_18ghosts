@@ -8,38 +8,39 @@ namespace Jogo18Ghosts
 
 
     // Saber se dois fantasmas estao na mesma casa
-
-
-    // Ver qual a cor de cada um 
-    public abstract class Players
-    {
-        public string Name { get; set; }
-        public abstract GameAction Act();
-    }
-
-    public class PlayerRed : Players
-    {
-        public override GameAction Act()
+    
+        public abstract class Players
         {
-            return GameAction.Red;
+            public string Name { get; set; }
+            public abstract GameAction Act();
         }
-    }
 
-    public class PlayerYellow : Players
-    {
-        public override GameAction Act()
+    //if (BlueVSRed)
+        public class PlayerRed : Players
         {
-            return GameAction.Yellow;
+            public override GameAction Act()
+            {
+                return GameAction.Red;
+            }
         }
-    }
 
-    public class PlayerBlue : Players
-    {
-        public override GameAction Act()
+    //if (YellowVSRed)
+        public class PlayerYellow : Players
         {
-            return GameAction.Blue;
+            public override GameAction Act()
+            {
+                return GameAction.Yellow;
+            }
         }
-    }
+
+    // if (BlueVSYellow)
+        public class PlayerBlue : Players
+        {
+            public override GameAction Act()
+            {
+                return GameAction.Blue;
+            }
+        }
 
     public enum GameAction
     {
@@ -81,7 +82,7 @@ namespace Jogo18Ghosts
         }
 
 
-        // Resolfer o comflicto
+        // Ver qual a cor de cada um e resolfer o comflicto
 
         private GameAction? WinningHand(GameAction p1, GameAction p2)
         {
