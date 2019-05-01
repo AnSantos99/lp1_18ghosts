@@ -6,20 +6,28 @@ namespace Jogo18Ghosts
     {
         static void Main(string[] args)
         {
-            string userMoveChoice = Console.ReadLine();
-            string userMoveChoiceLowCase = userMoveChoice.ToLower();
             
-            //string moveUp, moveDown, moveLeft, moveRight;
+            //Console.WriteLine("Where do you wanna go?");
 
-            if (userMoveChoiceLowCase == "up")
-            {
-                Console.WriteLine("HEHHEE");
-              
-            }
-            else
-            {
-                Console.WriteLine("HAHAHAHAHAH LOSER");
-            }
+            Player playerActions = new Player();
+  
+            Console.WriteLine("Do you want to use a normal move or do you" +
+                "wanna use the mirror chambers?");
+
+            string userInput = Console.ReadLine();
+
+            playerActions.Act1GhostMovement(userInput);
+            
+            
+
+
+            //int mirrorUpLeft, mirrorUpRight, mirrorDownLeft, mirrorDownRight;
+
+            //int [,] testBoard = new int [5,5];
+
+           
+
+
 
             Console.ReadKey();
 
