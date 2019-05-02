@@ -8,7 +8,9 @@ namespace Jogo18Ghosts
     {
         private static void Main(string[] args)
         {
-            //Asks Player Names
+
+
+            /*//Asks Player Names
             Console.WriteLine("Tell me your names Player 1, Player 2.");
 
             var player1 = new PlayerYellow()
@@ -43,9 +45,7 @@ namespace Jogo18Ghosts
 
             board = new GameBoard();
 
-            board.Board();
-
-
+            board.Board();*/
 
 
 
