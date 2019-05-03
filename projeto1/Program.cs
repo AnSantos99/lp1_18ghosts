@@ -9,6 +9,14 @@ namespace Jogo18Ghosts
         {
 
             /*//Asks Player Names
+            Console.WriteLine("Tell me your names Player 1, Player 2.");
+
+            var player1 = new PlayerYellow()
+            {
+                Name = Console.ReadLine()
+
+
+            /*//Asks Player Names
            Console.WriteLine("Tell me your names Player 1, Player 2.");
            var player1 = new PlayerYellow()
            {
@@ -56,7 +64,7 @@ namespace Jogo18Ghosts
 
 
 
-            1 = new PlayerFix();
+            player1 = new PlayerFix();
             player2 = new PlayerFix();
 
             //initializing the game cycle until a player has won or quit the game
@@ -64,6 +72,7 @@ namespace Jogo18Ghosts
             {
                 //draw the board on the console
                 renderer.Render(board);
+
 
                 //get current player's next move
                 Position nextMove;
@@ -76,6 +85,9 @@ namespace Jogo18Ghosts
 
                 if (!board.SetState(nextMove, board.NextTurn))
                     Console.WriteLine("There's already a ghost there!!");
+
+            board.Board();*/
+
 
             }
             //run while noone has won nor tied
