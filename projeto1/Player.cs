@@ -16,11 +16,11 @@ namespace Jogo18Ghosts
         //public string nameOfPlayer { get; set; }
         //public int numbOfGhosts { get; set; }
 
-        private int[,] testBoard = new int [5,5];
+        private int[,] testBoard = new int[5, 5];
 
 
         // ----------> Constructors <---------- //
-        public Player() { string playerActions = playerChoices; } 
+        public Player() { string playerActions = playerChoices; }
 
 
         // ----------> Functions <---------- //
@@ -125,7 +125,7 @@ namespace Jogo18Ghosts
             else
             {
                 Console.WriteLine("Invalid Choice");
-                
+
             }
         }
 
@@ -151,7 +151,7 @@ namespace Jogo18Ghosts
              */
 
             // Defeat ghost
-            
+
 
         }
 
