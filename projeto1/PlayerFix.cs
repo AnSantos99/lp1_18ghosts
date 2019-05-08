@@ -1,12 +1,20 @@
 using System;
+using System.Collections.Generic;
 
 namespace Jogo18Ghosts
 {
-    class PlayerFix
-    {   
+    public class PlayerFix
+    {
+        public char prefix;
+        public List<Ghosts> ghosts = new List<Ghosts>();
+
+        public PlayerFix(char prefix)
+        {
+            this.prefix = prefix;
+        }
 
         // getting player position from their input to place each ghost
-        internal Position GetPosition(GameBoard board)
+        public static Position GetPosition(GameBoard board)
         {
             //getting input
             string position = Console.ReadLine();
@@ -16,9 +24,9 @@ namespace Jogo18Ghosts
             Position desiredCoordinate = PositionForNumber(position);
             return desiredCoordinate;
         }
- 
+
         //determining what position on the board matches the player input
-        private Position PositionForNumber(string position)
+        private static Position PositionForNumber(string position)
         {
             switch (position)
             {
@@ -40,25 +48,21 @@ namespace Jogo18Ghosts
                 case "C4": return new Position(3, 2);
                 case "C5": return new Position(4, 2);
 
-                case "D1": return new Position(3, 3);
-                case "D2": return new Position(3, 3);
-                case "D3": return new Position(3, 3);
+                case "D1": return new Position(0, 3);
+                case "D2": return new Position(1, 3);
+                case "D3": return new Position(2, 3);
                 case "D4": return new Position(3, 3);
-                case "D5": return new Position(3, 3);
+                case "D5": return new Position(4, 3);
 
                 case "E1": return new Position(0, 4);
                 case "E2": return new Position(1, 4);
                 case "E3": return new Position(2, 4);
                 case "E4": return new Position(3, 4);
                 case "E5": return new Position(4, 4);
-                case "Q": 
+                case "Q":
 
                 default: return null;
-
-                
             }
-
-
-        } 
+        }
     }
 }

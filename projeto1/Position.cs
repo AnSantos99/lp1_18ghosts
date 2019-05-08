@@ -1,9 +1,9 @@
 namespace Jogo18Ghosts
 {
-    internal class Position
+    public class Position
     {
-        public int Row { get; }
-        public int Col { get; }
+        public int Row { set; get; }
+        public int Col { set; get; }
 
         public Position(int row, int col)
         {
@@ -12,4 +12,3 @@ namespace Jogo18Ghosts
         }
     }
 }
-        
