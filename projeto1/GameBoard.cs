@@ -4,151 +4,193 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
-    class GameBoard
+    public class GameBoard
     {
-        public void Board()
+        private State[,] state;
+        public State NextTurn { get; private set; }
+        private uint width = 5, height = 5;
+        public BoardPiece[,] pieces;
+
+        public GameBoard()
         {
-            Console.OutputEncoding = Encoding.UTF8;
+            state = new State[5, 5];
 
-            char ghost = '\u07F7';
-            char corridor = '\u20DE';
-            /*
-            char portalDown = ;
-            char portalLeft = ;
-            char portalRight = ;
-            char mirror = '\u20DE';
-            char portalUp = '\u20DD';
-            */
+            pieces = new BoardPiece[width, height];
+            pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[0, 1] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[0, 2] = new RedPortal(Portals.Direction.up);
+            pieces[0, 3] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[0, 4] = new BoardPiece("r", ConsoleColor.Red);
 
-            string[,] board = new string[5, 5];
+            pieces[1, 0] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[1, 1] = new BoardPiece("M", ConsoleColor.White);
+            pieces[1, 2] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[1, 3] = new BoardPiece("M", ConsoleColor.White);
+            pieces[1, 4] = new BoardPiece("y", ConsoleColor.Yellow);
 
-            int col = board.GetLength(1);
-            int row = board.GetLength(0);
+            pieces[2, 0] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[2, 1] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[2, 2] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[2, 3] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[2, 4] = new YellowPortal(Portals.Direction.right);
 
-            Console.WriteLine("__[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
+            pieces[3, 0] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[3, 1] = new BoardPiece("M", ConsoleColor.White);
+            pieces[3, 2] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[3, 3] = new BoardPiece("M", ConsoleColor.White);
+            pieces[3, 4] = new BoardPiece("r", ConsoleColor.Red);
 
-            //For loop to print the inside
-            for (int i = 0; i < row; i++)
-            {
-                Console.WriteLine("|     |     |     |     |     |");
-                Console.Write($"[{i}]");
-                for (int j = 0; j < col; j++)
-                {
+            pieces[4, 0] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[4, 1] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[4, 2] = new BluePortal(Portals.Direction.down);
+            pieces[4, 3] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[4, 4] = new BoardPiece("y", ConsoleColor.Yellow);
 
-                    if (i == 0)
-                    {
-                        if (j == 0 || j == 3)
-                        {
-                            board[i, j] = "b";
-                            Console.Write(board[i, j] + "   ");                
-                        }
 
-                        else if (j == 1 || j == 4)
-                        {
-                            board[i, j] = "r";    
-                            Console.Write("  " + board[i, j] + "  ");
-                        }
 
-                        else
-                        {
-                            board[i, j] = "rp";
-                            Console.Write("  " + board[i, j] + "     ");
-                        }
-                    }
-                    if (i == 1)
-                    {
-                        if (j == 0 || j == 1 || j == 2)
-                        {
-                            board[i, j] = "y"; 
-                            Console.Write(board[i, j] + "     ");
-                        }
 
-                        else
-                        {
-                            board[i, j] = "M";
-                            Console.Write(" " + board[i, j] + "   ");
-                        }
-                    }
-                    if (i == 2)
-                    {
-                        if (j == 0 || j == 2)
-                        {
-                            board[i, j] = "r";
-                            Console.Write(board[i, j] + "  ");
-                        }
-
-                        else if (j == 1 || j == 3)
-                        {
-                            board[i, j] = "b";
-                            Console.Write("   " + board[i, j] + "     ");
-                        }
-
-                        else
-                        {
-                            board[i, j] = "yp";
-                            Console.Write(board[i, j] + " ");
-                        }
-                    }
-                    if (i == 3)
-                    {
-                        if (j == 0)
-                        {
-                            board[i, j] = "b";
-                            Console.Write(board[i, j] + "  ");
-                        }
-
-                        else if (j == 2)
-                        {
-                            board[i, j] = "y";
-                            Console.Write("   " + board[i, j] + "  ");
-                        }
-
-                        else if (j == 4)
-                        {
-                            board[i, j] = "r";
-                            Console.Write("   " + board[i, j] + "  ");
-                        }
-
-                        else
-                        {
-                            board[i, j] = "M";
-                            Console.Write("   " + board[i, j] + "  ");
-                        }
-                    }
-                    if (i == 4)
-                    {
-                        if (j == 0 || j == 4)
-                        {
-                            board[i, j] ="y";
-                            Console.Write(board[i, j] + "  ");
-                        }
-
-                        else if (j == 3)
-                        {
-                            board[i, j] = "b";
-                            Console.Write("   " + board[i, j] + "     ");
-                        }
-
-                        else if (j == 2)
-                        {
-                            board[i, j] = "r";
-                            Console.Write("   " + board[i, j] + "  ");
-                        }
-
-                        else
-                        {
-                            board[i, j] = "bp";
-                            Console.Write("   " + board[i, j] + " ");
-                        }
-                    }
-
-                }
-                Console.Write("|");
-                Console.WriteLine();
-                Console.WriteLine("|__ __|__ __|__ __|__ __|__ __|");
-            }
-            Console.WriteLine("|                             |");
-            Console.WriteLine("|_____________________________|");
+            NextTurn = State.P1;
         }
-    }
-}
+        
+        public static BoardPiece GetBoardSettings(Position pos)
+        {
+            switch(pos.Row)
+            {
+                case 0:
+                    switch(pos.Col)
+                    {
+                        case 0:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 1:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                        case 2:
+                            return new RedPortal(Portals.Direction.up);
+                        case 3:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 4:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                    }
+                    break;
+                case 1:
+                    switch (pos.Col)
+                    {
+                        case 0:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                        case 1:
+                            return new BoardPiece("M", ConsoleColor.White);
+                        case 2:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                        case 3:
+                            return new BoardPiece("M", ConsoleColor.White);
+                        case 4:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                    }
+                    break;
+                case 2:
+                    switch (pos.Col)
+                    {
+                        case 0:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                        case 1:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 2:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                        case 3:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 4:
+                            return new YellowPortal(Portals.Direction.right);
+                    }
+                    break;
+                case 3:
+                    switch (pos.Col)
+                    {
+                        case 0:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 1:
+                            return new BoardPiece("M", ConsoleColor.White);
+                        case 2:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                        case 3:
+                            return new BoardPiece("M", ConsoleColor.White);
+                        case 4:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                    }
+                    break;
+                case 4:
+                    switch (pos.Col)
+                    {
+                        case 0:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                        case 1:
+                            return new BoardPiece("r", ConsoleColor.Red);
+                        case 2:
+                            return new BluePortal(Portals.Direction.down);
+                        case 3:
+                            return new BoardPiece("b", ConsoleColor.Blue);
+                        case 4:
+                            return new BoardPiece("y", ConsoleColor.Yellow);
+                    }
+                    break;
+            }
+            return null;
+        }
+
+        public State GetState(Position position)
+        {
+            return state[position.Row, position.Col];
+        }
+
+        public void SetGhost(Ghosts ghost, Position pos)
+        {
+            ghost.pos = pos;
+            pieces[pos.Row, pos.Col] = ghost;
+        }
+
+        public bool SetState(Position position, State newState)
+        {
+            if (newState != NextTurn) return false;
+            //if (state[position.Row, position.Col] != State.Undecided) return false;
+            state[position.Row, position.Col] = newState;
+            SwitchNextTurn();
+            return true;
+        }
+
+        public BoardPiece GetPiece(Position pos)
+        {
+            return pieces[pos.Row, pos.Col];
+               
+        }
+
+        public void render()
+        {
+            Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
+
+            for (uint y = 0; y<height; y++)
+            {
+                Console.WriteLine("  |     |     |     |     |     |");
+                Console.Write($"[{y + 1}] ");
+                for (uint x = 0; x<width; x++)
+                {
+                    if (pieces[y, x] != null)
+                    {
+                        pieces[y, x].Render();
+                    }
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("  |__ __|__ __|__ __|__ __|__ __|");
+            }
+
+
+            Console.WriteLine("  |                             |");
+            Console.WriteLine("  |                             |");
+            Console.WriteLine("  |_____________________________|");
+        }
+
+        private void SwitchNextTurn()
+        {
+            if (NextTurn == State.P1) NextTurn = State.P2;
+            else NextTurn = State.P1;
+        }
+     }
+ }
