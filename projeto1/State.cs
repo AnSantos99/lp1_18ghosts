@@ -1,5 +1,6 @@
 namespace Jogo18Ghosts
 {
+<<<<<<< HEAD
     public enum State {
         Undecided,
 
@@ -24,4 +25,7 @@ namespace Jogo18Ghosts
         BlueGhostsP2 = 'B',
         YellowGhostsP2 = 'C'
     };
+=======
+    internal enum State { Undecided, P1, P2 };
+>>>>>>> upstream/master
 }

@@ -5,16 +5,4 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CorridorPositions.cs" />
-    <Compile Remove="EmptyClass.cs" />
-    <Compile Remove="EmptyEnumeration.cs" />
-    <Compile Remove="Corridors.cs" />
-    <Compile Remove="CorridorTypes.cs" />
-    <Compile Remove="Player.cs" />
-    <Compile Remove="GamePlay.cs" />
-    <Compile Remove="CorridorSymbols.cs" />
-    <Compile Remove="Portal.cs" />
-    <Compile Remove="Renderer.cs" />
-  </ItemGroup>
 </Project>

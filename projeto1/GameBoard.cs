@@ -4,16 +4,24 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
+<<<<<<< HEAD
     public class GameBoard
     {
         private State[,] state;
         public State NextTurn { get; private set; }
         private uint width = 5, height = 5;
         public BoardPiece[,] pieces;
+=======
+    internal class GameBoard
+    {
+        private State[,] state;
+        public State NextTurn { get; private set; }
+>>>>>>> upstream/master
 
         public GameBoard()
         {
             state = new State[5, 5];
+<<<<<<< HEAD
 
             pieces = new BoardPiece[width, height];
             pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
@@ -134,11 +142,16 @@ namespace Jogo18Ghosts
             }
             return null;
         }
+=======
+            NextTurn = State.P1;
+        }
+>>>>>>> upstream/master
 
         public State GetState(Position position)
         {
             return state[position.Row, position.Col];
         }
+<<<<<<< HEAD
 
         public void SetGhost(Ghosts ghost, Position pos)
         {
@@ -187,6 +200,19 @@ namespace Jogo18Ghosts
             Console.WriteLine("  |_____________________________|");
         }
 
+=======
+
+        public bool SetState(Position position, State newState)
+        {
+            if (newState != NextTurn) return false;
+            if (state[position.Row, position.Col] != State.Undecided) return false;
+
+            state[position.Row, position.Col] = newState;
+            SwitchNextTurn();
+            return true;
+        }
+
+>>>>>>> upstream/master
         private void SwitchNextTurn()
         {
             if (NextTurn == State.P1) NextTurn = State.P2;

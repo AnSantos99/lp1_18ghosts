@@ -2,7 +2,10 @@ namespace Jogo18Ghosts
 {
     internal class WinChecker
     {
+<<<<<<< HEAD
         // checks if the requirements for winning are being met
+=======
+>>>>>>> upstream/master
         public State Check(GameBoard board)
         {
             if (CheckForWin(board, State.P1)) return State.P1;
