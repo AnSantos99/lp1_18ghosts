@@ -1,5 +1,4 @@
 using System;
-<<<<<<< HEAD
 using System.Collections.Generic;
 
 namespace Jogo18Ghosts
@@ -10,22 +9,12 @@ namespace Jogo18Ghosts
         public List<Ghosts> ghosts = new List<Ghosts>();
 
         public PlayerFix(char prefix)
-        { 
-            this.prefix = prefix; 
+        {
+            this.prefix = prefix;
         }
 
         // getting player position from their input to place each ghost
         public static Position GetPosition(GameBoard board)
-=======
-
-namespace Jogo18Ghosts
-{
-    class PlayerFix
-    {   
-
-        // getting player position from their input to place each ghost
-        internal Position GetPosition(GameBoard board)
->>>>>>> upstream/master
         {
             //getting input
             string position = Console.ReadLine();
@@ -35,13 +24,9 @@ namespace Jogo18Ghosts
             Position desiredCoordinate = PositionForNumber(position);
             return desiredCoordinate;
         }
- 
+
         //determining what position on the board matches the player input
-<<<<<<< HEAD
         private static Position PositionForNumber(string position)
-=======
-        private Position PositionForNumber(string position)
->>>>>>> upstream/master
         {
             switch (position)
             {
@@ -63,37 +48,21 @@ namespace Jogo18Ghosts
                 case "C4": return new Position(3, 2);
                 case "C5": return new Position(4, 2);
 
-<<<<<<< HEAD
                 case "D1": return new Position(0, 3);
                 case "D2": return new Position(1, 3);
                 case "D3": return new Position(2, 3);
                 case "D4": return new Position(3, 3);
                 case "D5": return new Position(4, 3);
-=======
-                case "D1": return new Position(3, 3);
-                case "D2": return new Position(3, 3);
-                case "D3": return new Position(3, 3);
-                case "D4": return new Position(3, 3);
-                case "D5": return new Position(3, 3);
->>>>>>> upstream/master
 
                 case "E1": return new Position(0, 4);
                 case "E2": return new Position(1, 4);
                 case "E3": return new Position(2, 4);
                 case "E4": return new Position(3, 4);
                 case "E5": return new Position(4, 4);
-                case "Q": 
+                case "Q":
 
                 default: return null;
-<<<<<<< HEAD
             }
-=======
-
-                
-            }
-
-
->>>>>>> upstream/master
-        } 
+        }
     }
 }

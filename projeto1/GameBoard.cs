@@ -4,24 +4,16 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
-<<<<<<< HEAD
     public class GameBoard
     {
         private State[,] state;
         public State NextTurn { get; private set; }
         private uint width = 5, height = 5;
         public BoardPiece[,] pieces;
-=======
-    internal class GameBoard
-    {
-        private State[,] state;
-        public State NextTurn { get; private set; }
->>>>>>> upstream/master
 
         public GameBoard()
         {
             state = new State[5, 5];
-<<<<<<< HEAD
 
             pieces = new BoardPiece[width, height];
             pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
@@ -59,13 +51,13 @@ namespace Jogo18Ghosts
 
             NextTurn = State.P1;
         }
-        
+
         public static BoardPiece GetBoardSettings(Position pos)
         {
-            switch(pos.Row)
+            switch (pos.Row)
             {
                 case 0:
-                    switch(pos.Col)
+                    switch (pos.Col)
                     {
                         case 0:
                             return new BoardPiece("b", ConsoleColor.Blue);
@@ -142,16 +134,11 @@ namespace Jogo18Ghosts
             }
             return null;
         }
-=======
-            NextTurn = State.P1;
-        }
->>>>>>> upstream/master
 
         public State GetState(Position position)
         {
             return state[position.Row, position.Col];
         }
-<<<<<<< HEAD
 
         public void SetGhost(Ghosts ghost, Position pos)
         {
@@ -171,18 +158,18 @@ namespace Jogo18Ghosts
         public BoardPiece GetPiece(Position pos)
         {
             return pieces[pos.Row, pos.Col];
-               
+
         }
 
         public void render()
         {
             Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
 
-            for (uint y = 0; y<height; y++)
+            for (uint y = 0; y < height; y++)
             {
                 Console.WriteLine("  |     |     |     |     |     |");
                 Console.Write($"[{y + 1}] ");
-                for (uint x = 0; x<width; x++)
+                for (uint x = 0; x < width; x++)
                 {
                     if (pieces[y, x] != null)
                     {
@@ -200,23 +187,10 @@ namespace Jogo18Ghosts
             Console.WriteLine("  |_____________________________|");
         }
 
-=======
-
-        public bool SetState(Position position, State newState)
-        {
-            if (newState != NextTurn) return false;
-            if (state[position.Row, position.Col] != State.Undecided) return false;
-
-            state[position.Row, position.Col] = newState;
-            SwitchNextTurn();
-            return true;
-        }
-
->>>>>>> upstream/master
         private void SwitchNextTurn()
         {
             if (NextTurn == State.P1) NextTurn = State.P2;
             else NextTurn = State.P1;
         }
-     }
- }
+    }
+}
