@@ -1,4 +1,3 @@
-using System;
 namespace Jogo18Ghosts
 {
     internal enum Direction

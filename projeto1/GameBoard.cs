@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Jogo18Ghosts
 {
@@ -16,45 +15,43 @@ namespace Jogo18Ghosts
         internal GameBoard()
         {
             // initialise variables to convert symbols to string for rendering
-            string b;
-            string r;
-            string y;
+            string c;
+      
 
             // declare the strings
-            b = Convert.ToString((char)Symbols.bCorridor);
-            r = Convert.ToString((char)Symbols.rCorridor);
-            y = Convert.ToString((char)Symbols.yCorridor);
+            c = Convert.ToString((char)Symbols.Corridor);
 
+            //place the pieces on the piece array and set their colour and symbol
             pieces = new BoardPiece[width, height];
-            pieces[0, 0] = new BoardPiece(b, ConsoleColor.Blue);
-            pieces[0, 1] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[0, 0] = new BoardPiece(c, ConsoleColor.Blue);
+            pieces[0, 1] = new BoardPiece(c, ConsoleColor.Red);
             pieces[0, 2] = new RedPortal(Direction.up);
-            pieces[0, 3] = new BoardPiece(b, ConsoleColor.Blue);
-            pieces[0, 4] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[0, 3] = new BoardPiece(c, ConsoleColor.Blue);
+            pieces[0, 4] = new BoardPiece(c, ConsoleColor.Red);
 
-            pieces[1, 0] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[1, 0] = new BoardPiece(c, ConsoleColor.Yellow);
             pieces[1, 1] = new Mirror();
-            pieces[1, 2] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[1, 2] = new BoardPiece(c, ConsoleColor.Yellow);
             pieces[1, 3] = new Mirror();
-            pieces[1, 4] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[1, 4] = new BoardPiece(c, ConsoleColor.Yellow);
 
-            pieces[2, 0] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[2, 1] = new BoardPiece(b, ConsoleColor.Blue);
-            pieces[2, 2] = new BoardPiece(r, ConsoleColor.Red);
-            pieces[2, 3] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[2, 0] = new BoardPiece(c, ConsoleColor.Red);
+            pieces[2, 1] = new BoardPiece(c, ConsoleColor.Blue);
+            pieces[2, 2] = new BoardPiece(c, ConsoleColor.Red);
+            pieces[2, 3] = new BoardPiece(c, ConsoleColor.Blue);
             pieces[2, 4] = new YellowPortal(Direction.right);
 
-            pieces[3, 0] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[3, 0] = new BoardPiece(c, ConsoleColor.Blue);
             pieces[3, 1] = new Mirror();
-            pieces[3, 2] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[3, 2] = new BoardPiece(c, ConsoleColor.Yellow);
             pieces[3, 3] = new Mirror();
-            pieces[3, 4] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[3, 4] = new BoardPiece(c, ConsoleColor.Red);
 
-            pieces[4, 0] = new BoardPiece(y, ConsoleColor.Yellow);
-            pieces[4, 1] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[4, 0] = new BoardPiece(c, ConsoleColor.Yellow);
+            pieces[4, 1] = new BoardPiece(c, ConsoleColor.Red);
             pieces[4, 2] = new BluePortal(Direction.down);
-            pieces[4, 3] = new BoardPiece(b, ConsoleColor.Blue);
-            pieces[4, 4] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[4, 3] = new BoardPiece(c, ConsoleColor.Blue);
+            pieces[4, 4] = new BoardPiece(c, ConsoleColor.Yellow);
 
             
         }
