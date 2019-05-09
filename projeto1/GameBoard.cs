@@ -350,12 +350,12 @@ namespace Jogo18Ghosts
         /// <param name="y">the y axis from board</param>
         private void CheckPortalNeighbour(Portals portal, int x, int y)
         {
-            //checks if piece is a ghost matching the portal colour
+            // checks if piece is a ghost matching the portal colour
             if (pieces[y, x] is Ghosts ghost && ghost.color == portal.color)
             {
-                //adds ghost to the free ghost list
+                // adds ghost to the free ghost list
                 ghost.player.ghostsFree.Add((Ghosts)pieces[y, x]);
-                //returns corridor back to its original empty colour state
+                // returns corridor back to its original empty colour state
                 pieces[y, x] = GetBoardSettings(new Position(y, x));
             }
         }
@@ -371,10 +371,10 @@ namespace Jogo18Ghosts
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    //checks if the piece is a portal and it matches the color
+                    // checks if the piece is a portal and it matches the color
                     if (pieces[i, j] is Portals portal && portal.color == color)
                     {
-                        //checking the neighbours according to the facing dir
+                        // checking the neighbours according to the facing dir
                         switch (portal.dir)
                         {
                             case Direction.up:
