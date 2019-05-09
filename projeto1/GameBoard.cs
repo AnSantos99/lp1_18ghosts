@@ -245,26 +245,36 @@ namespace Jogo18Ghosts
         /// </summary>
         internal void Render()
         {
+            //print the top row
             Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
 
+            //begin cycle to set all the rows right
             for (uint y = 0; y < height; y++)
             {
+                
                 Console.WriteLine("  |     |     |     |     |     |");
                 Console.Write($"[{y + 1}] ");
+
+                //check if there are pieces and place them
                 for (uint x = 0; x < width; x++)
                 {
                     if (pieces[y, x] != null)
                         pieces[y, x].Render();
                 }
-
+                
+                //new line to render bottom of row
                 Console.WriteLine();
                 Console.WriteLine("  |__ __|__ __|__ __|__ __|__ __|");
             }
-
+           
+            //print the dungeon
             Console.WriteLine("  |                             |");
             Console.Write("6 |");
-            uint counter = 0,
-                 uCounter = 6;
+
+            //simulating coordinates outside of normal board for
+            uint counter = 0, uCounter = 6;
+            
+            //checking ghosts inside dungeon and rendering it
             foreach (Ghosts soul in dungeonGhosts)
             {
                 soul.Render();
@@ -277,18 +287,29 @@ namespace Jogo18Ghosts
                     Console.Write(uCounter + " |");
                 }
             }
+
+            //printing bottom of dungeon
             Console.WriteLine();
             Console.WriteLine("  |_____________________________|");
         }
 
+        /// <summary>
+        /// this method checks what ghost lost a fight and calls the portal
+        /// update function in the Portal class in order to turn it, sends
+        /// the ghost to the dungeon
+        /// </summary>
+        /// <param name="piece">checks the ghost that lost</param>
         internal void OnPieceLost(BoardPiece piece)
         {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (pieces[i, j] is Portals portal && portal.color == piece.color)
+                    //finds the portal with the colour that matches the ghost
+                    if (pieces[i, j] is Portals portal && 
+                        portal.color == piece.color)
                     {
+                        //rotates the portal
                         portal.Turn();
                         UpdatePortal(portal.color);
                         break;
@@ -296,6 +317,7 @@ namespace Jogo18Ghosts
                 }
             }
 
+            //checks the ghost that lost and sends it to the dungeon
             if (piece is Ghosts ghost)
                 dungeonGhosts.Add(ghost);
         }

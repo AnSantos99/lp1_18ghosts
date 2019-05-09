@@ -9,10 +9,17 @@ namespace Jogo18Ghosts
     /// </summary>
     internal class Player
     {
+        //char to tell whose player the ghost belongs to
         internal char prefix;
+
+        //lists of ghosts for the board and ghosts that have left the board
         internal List<Ghosts> ghosts = new List<Ghosts>();
         internal List<Ghosts> ghostsFree = new List<Ghosts>();
 
+        /// <summary>
+        /// this method receives the prefix according to the player and sets it
+        /// </summary>
+        /// <param name="prefix"></param>
         internal Player(char prefix)
         {
             this.prefix = prefix;
@@ -30,7 +37,11 @@ namespace Jogo18Ghosts
             Position desiredCoordinate = PositionForNumber(position);
             return desiredCoordinate;
         }
-
+        /// <summary>
+        /// this method checks if the ghosts in the free ghosts list are at
+        /// least one of each colour so a player can win the game
+        /// </summary>
+        /// <returns>true if the winning condition is met</returns>
         internal bool Won()
         {
             uint y = 0, b = 0, r = 0;
@@ -52,10 +63,11 @@ namespace Jogo18Ghosts
         /// this method receives the input of position the player has given and
         /// returns it on the board so each ghost can be set and rendered
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">player input to place in board</param>
         /// <returns></returns>
         private static Position PositionForNumber(string position)
         {
+            // based onthe player's input the position is added to the board
             switch (position)
             {
                 case "A1": return new Position(0, 0);
