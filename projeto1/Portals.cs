@@ -8,14 +8,7 @@ namespace Jogo18Ghosts
     /// </summary>
     public class Portals : BoardPiece
     {
-        public enum Direction
-        {
-            up,
-            down,
-            left,
-            right
-        }
-
+        
         public Direction dir = Direction.up;
 
         public Portals(Direction dir)

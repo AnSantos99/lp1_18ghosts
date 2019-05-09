@@ -18,7 +18,7 @@ namespace Jogo18Ghosts
             pieces = new BoardPiece[width, height];
             pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[0, 1] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[0, 2] = new RedPortal(Portals.Direction.up);
+            pieces[0, 2] = new RedPortal(Direction.up);
             pieces[0, 3] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[0, 4] = new BoardPiece("r", ConsoleColor.Red);
 
@@ -32,7 +32,7 @@ namespace Jogo18Ghosts
             pieces[2, 1] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[2, 2] = new BoardPiece("r", ConsoleColor.Red);
             pieces[2, 3] = new BoardPiece("b", ConsoleColor.Blue);
-            pieces[2, 4] = new YellowPortal(Portals.Direction.right);
+            pieces[2, 4] = new YellowPortal(Direction.right);
 
             pieces[3, 0] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[3, 1] = new Mirror();
@@ -42,7 +42,7 @@ namespace Jogo18Ghosts
 
             pieces[4, 0] = new BoardPiece("y", ConsoleColor.Yellow);
             pieces[4, 1] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[4, 2] = new BluePortal(Portals.Direction.down);
+            pieces[4, 2] = new BluePortal(Direction.down);
             pieces[4, 3] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[4, 4] = new BoardPiece("y", ConsoleColor.Yellow);
 
@@ -61,7 +61,7 @@ namespace Jogo18Ghosts
                         case 1:
                             return new BoardPiece("r", ConsoleColor.Red);
                         case 2:
-                            return new RedPortal(Portals.Direction.up);
+                            return new RedPortal(Direction.up);
                         case 3:
                             return new BoardPiece("b", ConsoleColor.Blue);
                         case 4:
@@ -95,7 +95,7 @@ namespace Jogo18Ghosts
                         case 3:
                             return new BoardPiece("b", ConsoleColor.Blue);
                         case 4:
-                            return new YellowPortal(Portals.Direction.right);
+                            return new YellowPortal(Direction.right);
                     }
                     break;
                 case 3:
@@ -121,7 +121,7 @@ namespace Jogo18Ghosts
                         case 1:
                             return new BoardPiece("r", ConsoleColor.Red);
                         case 2:
-                            return new BluePortal(Portals.Direction.down);
+                            return new BluePortal(Direction.down);
                         case 3:
                             return new BoardPiece("b", ConsoleColor.Blue);
                         case 4:
@@ -281,19 +281,19 @@ namespace Jogo18Ghosts
 
                         switch (portal.dir)
                         {
-                            case Portals.Direction.up:
+                            case Direction.up:
                                 if (i > 0)
                                     CheckPortalNeighbour(portal, j, i - 1);
                                 break;
-                            case Portals.Direction.down:
+                            case Direction.down:
                                 if (i < height - 1)
                                     CheckPortalNeighbour(portal, j, i + 1);
                                 break;
-                            case Portals.Direction.left:
+                            case Direction.left:
                                 if (j > 0)
                                     CheckPortalNeighbour(portal, j - 1, i);
                                 break;
-                            case Portals.Direction.right:
+                            case Direction.right:
                                 if (j < width - 1)
                                     CheckPortalNeighbour(portal, j + 1, i);
                                 break;
