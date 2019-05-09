@@ -81,62 +81,103 @@ namespace Jogo18Ghosts
                 //clear console for cleaner outputs
                 Console.Clear();
 
+
+                Console.WriteLine("Escape the Castle!!!");
                 //call the renderer function to draw the board on the console
                 board.Render();
 
-                Console.WriteLine((ghost.player == player1 ? "player1" : "player2") + ": Place your ghost");
+                //tell the player how to place the ghosts
+                Console.WriteLine("Order of Placing:");
+                Console.WriteLine(" First Turn:");
+               
+                Console.WriteLine("  Player1 Yellow Ghost,  Player2 Yellow Ghost" +
+                    ",  Player2 Blue Ghost\n");
+       
+                Console.WriteLine(" Remaining Turns:");
+                Console.WriteLine("  Player1 Blue Ghost,  Player2 Red Ghost" +
+                    ",  Player1 Red Ghost, repeat");
+
+                Console.WriteLine((ghost.player == player1 ? "player1" 
+                    : "player2") + ": Place your ghost");
+
+                //get the position chosen by the player and set it on the board
                 Position pos = Player.GetPosition(board);
-                if (board.pieces[pos.Row, pos.Col] is Ghosts || board.pieces[pos.Row, pos.Col].color != ghost.color ||
+                
+                //set error to true if the chosen position isn't valid
+                if (board.pieces[pos.Row, pos.Col] is Ghosts || 
+                    board.pieces[pos.Row, pos.Col].color != ghost.color ||
                     board.pieces[pos.Row, pos.Col] is Portals)
                 {
                     i--;
                     error = true;
                     continue;
-
                 }
-
+                
+                //place the ghosts and their given positions on the board
                 board.SetGhost(ghost, pos);
 
             }
 
+            //set currentPlayer back to 2 for usage in the do while game cycle
             currentPlayer = player2;
 
             //initializing the game cycle until a player has won or quit the game
             do
             {
-
+                //conditions to switch players
                 if (currentPlayer == player1)
                     currentPlayer = player2;
                 else
                     currentPlayer = player1;
 
+                //clear the previous board console to render the new state
                 Console.Clear();
+                
+                //let user know who's currently playing
                 Console.WriteLine(currentPlayer == player1 ? "player1" : "player2");
+
+                //render the board on the console
                 board.Render();
 
+                //update the board if a ghost is moved from a corridor
                 Update();
             }
 
-            //run while noone has won nor tied
+            //run until a player has won the game
             while (!player1.Won() && !player2.Won());
-
+            
+            // check what player has won the game and print the result
             if (player1.Won())
-                Console.WriteLine("Player 1 Has WON!!");
+                Console.WriteLine("Congratulations!!! Player 1 is free!!");
             else if (player2.Won())
-                Console.WriteLine("Player 2 Has WON!!");
+                Console.WriteLine("Congratulations!!! Player 2 is free!!");
 
+            //reads player's input
             Console.ReadKey();
 
         }
 
+        /// <summary>
+        /// this method gets a ghost, its position and a new position to where
+        /// the player wants to move it, and updates the portals if there's
+        /// been a battle between ghosts. it doesn't return anything.
+        /// </summary>
+        /// <param name="piece"> the current ghost type</param>
+        /// <param name="newPos"> the position to which it's been moved</param>
+        /// <param name="oldPos"> the position it was originally in</param>
+
         private static void MovePiece(BoardPiece piece, Position newPos, Position oldPos)
         {
+            //
             board.pieces[newPos.Row, newPos.Col] = GameBoard.GetBoardSettings(newPos);
             board.pieces[oldPos.Row, oldPos.Col] = piece;
 
             board.UpdatePortal(piece.color);
         }
 
+        /// <summary>
+        /// this method returns nothing. it's purpose is to update the board
+        /// </summary>
         private static void Update()
         {
             if (board.CountLostSoulsForPlayer(currentPlayer) > 0)
