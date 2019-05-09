@@ -64,7 +64,7 @@ namespace Jogo18Ghosts
             Console.ForegroundColor = auxColour;
         }
 
-        //checks other ghost and returns red if the ghost lost
+        // checks other ghost and returns red if the ghost lost
         internal override bool checkWinner(Ghosts ghost)
         {
             return ghost.color == ConsoleColor.Red;
@@ -93,22 +93,22 @@ namespace Jogo18Ghosts
         /// <param name="spaces">spaces between ghost and corridor</param>
         internal override void Render(bool spaces = true)
         {
-            //get the default colour
+            // get the default colour
             ConsoleColor auxColour = Console.ForegroundColor;
 
-            //set the colour to red for the ghost
+            // set the colour to red for the ghost
             Console.ForegroundColor = ConsoleColor.Red;
 
-            //place the ghost or the spaces
+            // place the ghost or the spaces
             if (spaces)
                 Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("R" + player.prefix);
-            //go back to default colour for the board
+            // go back to default colour for the board
             Console.ForegroundColor = auxColour;
         }
 
-        //checks other ghost and returns blue if the ghost lost
+        // checks other ghost and returns blue if the ghost lost
         internal override bool checkWinner(Ghosts ghost)
         {
             return ghost.color == ConsoleColor.Blue;
@@ -132,22 +132,22 @@ namespace Jogo18Ghosts
         /// <param name="spaces">spaces between ghost and corridor</param>
         internal override void Render(bool spaces = true)
         {
-            //get the default colour
+            // get the default colour
             ConsoleColor auxColour = Console.ForegroundColor;
 
-            //set the colour to red for the ghost
+            // set the colour to red for the ghost
             Console.ForegroundColor = ConsoleColor.Blue;
 
-            //place the ghost or the spaces
+            // place the ghost or the spaces
             if (spaces)
                 Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("B" + player.prefix);
-            //go back to default colour for the board
+            // go back to default colour for the board
             Console.ForegroundColor = auxColour;
         }
 
-        //checks other ghost and returns yellow if the ghost lost
+        // checks other ghost and returns yellow if the ghost lost
         internal override bool checkWinner(Ghosts ghost)
         {
             return ghost.color == ConsoleColor.Yellow;
