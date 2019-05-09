@@ -6,7 +6,7 @@ namespace Jogo18Ghosts
     internal class Program
     {
         static GameBoard board;
-        static PlayerFix currentPlayer;
+        static Player currentPlayer;
 
         private static void Main(string[] args)
         {

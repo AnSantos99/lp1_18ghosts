@@ -6,17 +6,16 @@ namespace Jogo18Ghosts
     /// each portal starts off pointing towards a certain direction and then
     /// rotates whenever a ghost of its colour loses a fight
     /// </summary>
-    public class Portals : BoardPiece
+    internal class Portals : BoardPiece
     {
-        
-        public Direction dir = Direction.up;
+        internal Direction dir = Direction.up;
 
-        public Portals(Direction dir)
+        internal Portals(Direction dir)
         {
             this.dir = dir;
         }
 
-        public void Turn()
+        internal void Turn()
         {
             switch (dir)
             {
@@ -35,7 +34,7 @@ namespace Jogo18Ghosts
             }
         }
 
-        public override void Render(bool spaces = true)
+        internal override void Render(bool spaces = true)
         {
             ConsoleColor auxColor = Console.ForegroundColor;
 
@@ -65,9 +64,9 @@ namespace Jogo18Ghosts
         }
     }
 
-    public class RedPortal : Portals
+    internal class RedPortal : Portals
     {
-        public RedPortal(Direction dir) : base(dir)
+        internal RedPortal(Direction dir) : base(dir)
         {
             color = ConsoleColor.Red;
         }
@@ -75,9 +74,9 @@ namespace Jogo18Ghosts
 
     }
 
-    public class BluePortal : Portals
+    internal class BluePortal : Portals
     {
-        public BluePortal(Direction dir) : base(dir)
+        internal BluePortal(Direction dir) : base(dir)
         {
             color = ConsoleColor.Blue;
         }
@@ -85,9 +84,9 @@ namespace Jogo18Ghosts
 
     }
 
-    public class YellowPortal : Portals
+    internal class YellowPortal : Portals
     {
-        public YellowPortal(Direction dir) : base(dir)
+        internal YellowPortal(Direction dir) : base(dir)
         {
             color = ConsoleColor.Yellow;
         }

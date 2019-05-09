@@ -10,10 +10,10 @@ namespace Jogo18Ghosts
     /// this class' purpose is to set the mirrors on the board by giving them
     /// their character and colour for the render
     /// </summary>
-    sealed public class Mirror : BoardPiece
+    sealed internal class Mirror : BoardPiece
     {
-        public Mirror()
-            : base("M", ConsoleColor.White)
+        internal Mirror()
+            : base(Convert.ToString((char)Symbols.mirror), ConsoleColor.White)
         {
         }
     }

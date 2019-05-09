@@ -5,16 +5,16 @@ namespace Jogo18Ghosts
     /// This class checks the position of each piece and renders it depending
     /// on the type of piece
     /// </summary>
-    public class BoardPiece
+    internal class BoardPiece
     {
-        public Position pos;
+        internal Position pos;
         protected string prefix;
-        public ConsoleColor color;
+        internal ConsoleColor color;
 
         /// <summary>
         /// this method returns the default board piece
         /// </summary>
-        public BoardPiece()
+        internal BoardPiece()
             : this("", ConsoleColor.White)
         {
         }
@@ -25,7 +25,7 @@ namespace Jogo18Ghosts
         /// </summary>
         /// <param name="prefix"></param>
         /// <param namC:\Users\nani\Desktop\LP1_Ghosts\LP1_Ghosts\BoardPiece.cse="color"></param>
-        public BoardPiece(string prefix, ConsoleColor color)
+        internal BoardPiece(string prefix, ConsoleColor color)
         {
             this.prefix = prefix;
             this.color = color;
@@ -36,7 +36,7 @@ namespace Jogo18Ghosts
         /// it gets about the piece type
         /// </summary>
         /// <param name="spaces"></param>
-        public virtual void Render(bool spaces = true)
+        internal virtual void Render(bool spaces = true)
         {
             ConsoleColor auxColor = Console.ForegroundColor;
 

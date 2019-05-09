@@ -7,49 +7,59 @@ namespace Jogo18Ghosts
     /// <summary>
     /// 
     /// </summary>
-    public class GameBoard
+    internal class GameBoard
     {    
         private uint width = 5, height = 5;
-        public BoardPiece[,] pieces;
-        public List<Ghosts> lostSouls = new List<Ghosts>();
+        internal BoardPiece[,] pieces;
+        internal List<Ghosts> lostSouls = new List<Ghosts>();
 
-        public GameBoard()
+        internal GameBoard()
         {
-            pieces = new BoardPiece[width, height];
-            pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
-            pieces[0, 1] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[0, 2] = new RedPortal(Direction.up);
-            pieces[0, 3] = new BoardPiece("b", ConsoleColor.Blue);
-            pieces[0, 4] = new BoardPiece("r", ConsoleColor.Red);
+            // initialise variables to convert symbols to string for rendering
+            string b;
+            string r;
+            string y;
 
-            pieces[1, 0] = new BoardPiece("y", ConsoleColor.Yellow);
+            // declare the strings
+            b = Convert.ToString((char)Symbols.bCorridor);
+            r = Convert.ToString((char)Symbols.rCorridor);
+            y = Convert.ToString((char)Symbols.yCorridor);
+
+            pieces = new BoardPiece[width, height];
+            pieces[0, 0] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[0, 1] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[0, 2] = new RedPortal(Direction.up);
+            pieces[0, 3] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[0, 4] = new BoardPiece(r, ConsoleColor.Red);
+
+            pieces[1, 0] = new BoardPiece(y, ConsoleColor.Yellow);
             pieces[1, 1] = new Mirror();
-            pieces[1, 2] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[1, 2] = new BoardPiece(y, ConsoleColor.Yellow);
             pieces[1, 3] = new Mirror();
-            pieces[1, 4] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[1, 4] = new BoardPiece(y, ConsoleColor.Yellow);
 
             pieces[2, 0] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[2, 1] = new BoardPiece("b", ConsoleColor.Blue);
-            pieces[2, 2] = new BoardPiece("r", ConsoleColor.Red);
-            pieces[2, 3] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[2, 1] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[2, 2] = new BoardPiece(r, ConsoleColor.Red);
+            pieces[2, 3] = new BoardPiece(b, ConsoleColor.Blue);
             pieces[2, 4] = new YellowPortal(Direction.right);
 
-            pieces[3, 0] = new BoardPiece("b", ConsoleColor.Blue);
+            pieces[3, 0] = new BoardPiece(b, ConsoleColor.Blue);
             pieces[3, 1] = new Mirror();
-            pieces[3, 2] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[3, 2] = new BoardPiece(y, ConsoleColor.Yellow);
             pieces[3, 3] = new Mirror();
-            pieces[3, 4] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[3, 4] = new BoardPiece(r, ConsoleColor.Red);
 
-            pieces[4, 0] = new BoardPiece("y", ConsoleColor.Yellow);
-            pieces[4, 1] = new BoardPiece("r", ConsoleColor.Red);
+            pieces[4, 0] = new BoardPiece(y, ConsoleColor.Yellow);
+            pieces[4, 1] = new BoardPiece(r, ConsoleColor.Red);
             pieces[4, 2] = new BluePortal(Direction.down);
-            pieces[4, 3] = new BoardPiece("b", ConsoleColor.Blue);
-            pieces[4, 4] = new BoardPiece("y", ConsoleColor.Yellow);
+            pieces[4, 3] = new BoardPiece(b, ConsoleColor.Blue);
+            pieces[4, 4] = new BoardPiece(y, ConsoleColor.Yellow);
 
             
         }
 
-        public static BoardPiece GetBoardSettings(Position pos)
+        internal static BoardPiece GetBoardSettings(Position pos)
         {
             switch (pos.Row)
             {
@@ -134,13 +144,13 @@ namespace Jogo18Ghosts
 
         
 
-        public void SetGhost(Ghosts ghost, Position pos)
+        internal void SetGhost(Ghosts ghost, Position pos)
         {
             ghost.pos = pos;
             pieces[pos.Row, pos.Col] = ghost;
         }
 
-        public Ghosts GetLostSoul(string position)
+        internal Ghosts GetLostSoul(string position)
         {
             switch (position.ToUpper())
             {
@@ -172,7 +182,7 @@ namespace Jogo18Ghosts
             return null;
         }
 
-        public uint CountLostSoulsForPlayer(PlayerFix player)
+        internal uint CountLostSoulsForPlayer(Player player)
         {
             uint counter = 0;
             foreach (Ghosts ghost in lostSouls)
@@ -183,13 +193,13 @@ namespace Jogo18Ghosts
         }
 
         
-        public BoardPiece GetPiece(Position pos)
+        internal BoardPiece GetPiece(Position pos)
         {
             return pieces[pos.Row, pos.Col];
 
         }
 
-        public void render()
+        internal void render()
         {
             Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
 
@@ -227,7 +237,7 @@ namespace Jogo18Ghosts
             Console.WriteLine("  |_____________________________|");
         }
 
-        public void OnPieceLost(BoardPiece piece)
+        internal void OnPieceLost(BoardPiece piece)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -246,7 +256,7 @@ namespace Jogo18Ghosts
                 lostSouls.Add(ghost);
         }
 
-        public uint CountMirrors()
+        internal uint CountMirrors()
         {
             uint count = 0;
             for (int i = 0; i < 5; i++)
@@ -270,7 +280,7 @@ namespace Jogo18Ghosts
             }
         }
 
-        public void UpdatePortal(ConsoleColor color)
+        internal void UpdatePortal(ConsoleColor color)
         {
             for (int i = 0; i < 5; i++)
             {
