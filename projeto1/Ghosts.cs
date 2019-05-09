@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Jogo18Ghosts
 {
@@ -39,7 +38,7 @@ namespace Jogo18Ghosts
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             if (spaces)
-                Console.Write(" " + (char)Symbols.ghost1 + player.prefix + "   ");
+                Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("Y" + player.prefix);
 
@@ -63,7 +62,7 @@ namespace Jogo18Ghosts
             Console.ForegroundColor = ConsoleColor.Red;
 
             if (spaces)
-                Console.Write(" " + (char)Symbols.ghost1 + player.prefix + "   ");
+                Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("R" + player.prefix);
 
@@ -87,7 +86,7 @@ namespace Jogo18Ghosts
             Console.ForegroundColor = ConsoleColor.Blue;
 
             if (spaces)
-                Console.Write(" " + (char)Symbols.ghost1 + player.prefix + "   ");
+                Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("B" + player.prefix);
 

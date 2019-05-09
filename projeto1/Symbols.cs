@@ -1,16 +1,16 @@
-using System;
 namespace Jogo18Ghosts
 {
+    /// <summary>
+    /// this enum sets the unicode characters for the ghost, corridor and mirror
+    /// that'll be rendered on the board
+    /// </summary>
     internal enum Symbols
     {
-        ghost1 = 'A',
-        ghost2 = 'B',
+        ghost = '\u04DA',
 
-        yCorridor = 'y',
-        bCorridor = 'n',
-        rCorridor = 'r',
-
-        mirror = 'M'
+        Corridor = '\u2542',
+      
+        mirror = '\u03D8'
 
     }
 }
