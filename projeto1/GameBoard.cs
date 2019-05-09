@@ -162,7 +162,11 @@ namespace Jogo18Ghosts
         /// <param name="ghost">chosen ghost</param>
         /// <param name="pos">wanted position</param>
         internal void SetGhost(Ghosts ghost, Position pos)
+
         { 
+=======
+        {
+
             // set the ghost in that position
             ghost.pos = pos;
             // assign that position as a ghost 

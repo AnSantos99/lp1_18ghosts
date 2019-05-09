@@ -40,12 +40,12 @@ namespace Jogo18Ghosts
             // different colour each time
             for (int i = 0; i<3; i++)
             {
-                //add the 1st player's three colours of ghosts
+                // add the 1st player's three colours of ghosts
                 player1.ghosts.Add(new YellowGhost(player1));
                 player1.ghosts.Add(new BlueGhost(player1));
                 player1.ghosts.Add(new RedGhost(player1));
 
-                //add the 2nd player's three colours of ghosts
+                // add the 2nd player's three colours of ghosts
                 player2.ghosts.Add(new YellowGhost(player2));
                 player2.ghosts.Add(new BlueGhost(player2));
                 player2.ghosts.Add(new RedGhost(player2));
@@ -54,7 +54,7 @@ namespace Jogo18Ghosts
             // set the current player to player two so we can switch to 1 later
             currentPlayer = player2;
 
-            //in case of incorrect input from the user
+            // in case of incorrect input from the user
             bool error; 
             
             error = false;
@@ -100,7 +100,11 @@ namespace Jogo18Ghosts
                 Console.WriteLine((ghost.player == player1 ? "player1" 
                     : "player2") + ": Place your ghost");
 
+
                 // get the position chosen by the player and set it on the board
+
+                // get position chosen by the player and set it on the board
+
                 Position pos = Player.GetPosition(board);
                 
                 // set error to true if the chosen position isn't valid
@@ -121,7 +125,11 @@ namespace Jogo18Ghosts
             // set currentPlayer back to 2 for usage in the do while game cycle
             currentPlayer = player2;
 
+
             // initializing the game cycle until a player has won or quit the game
+
+            // initializing game cycle until a player has won or quit the game
+
             do
             {
                 // conditions to switch players
@@ -165,15 +173,19 @@ namespace Jogo18Ghosts
         /// <param name="piece"> the current ghost type</param>
         /// <param name="newPos"> the position to which it's been moved</param>
         /// <param name="oldPos"> the position it was originally in</param>
-        private static void MovePiece(BoardPiece piece, Position newPos, 
-            Position oldPos)
+        private static void MovePiece(BoardPiece piece, Position newPos, Position oldPos)
         {
+
             // placing the piece in the new position and updating the board
             board.pieces[newPos.Row, newPos.Col] = 
                 GameBoard.GetBoardSettings(newPos);
             board.pieces[oldPos.Row, oldPos.Col] = piece;
 
             // send piece information to UpdatePortal to check if rotation is due
+
+            board.pieces[newPos.Row, newPos.Col] = GameBoard.GetBoardSettings(newPos);
+            board.pieces[oldPos.Row, oldPos.Col] = piece;
+
             board.UpdatePortal(piece.color);
         }
 
@@ -182,6 +194,7 @@ namespace Jogo18Ghosts
         /// </summary>
         private static void Update()
         {
+
             // if the dungeon has any ghost belonging to this player
             if (board.CountdungeonGhostsForPlayer(currentPlayer) > 0)
             {
@@ -192,6 +205,14 @@ namespace Jogo18Ghosts
                 {
                     // get the ghost's position from the dungeon
                     Console.WriteLine("Input ghost's dungeon coordinates");
+
+            if (board.CountdungeonGhostsForPlayer(currentPlayer) > 0)
+            {
+                Console.WriteLine("Quer mover ou ressuscitar um fantasma? (R/F)");
+                if (Console.ReadLine().ToUpper() == "R")
+                {
+                    Console.WriteLine("Que fantasma que ressuscitar?");
+
                     Ghosts ghost = board.GetDungeonGhost(Console.ReadLine());
 
                     if (ghost != null)
@@ -199,20 +220,30 @@ namespace Jogo18Ghosts
                         BoardPiece fPiece = null;
                         Position fPos = null;
 
+
                         // ask player to place ghost on the board from dungeon
                         do
                         {
                             // get input on board
                             Console.WriteLine("Input position on board");
+
+                        do
+                        {
+                            Console.WriteLine("Que posição quer por o fantasma?");
+
                             fPos = Player.GetPosition(board);
                             fPiece = board.GetPiece(fPos);
                         }
                         while (fPiece is Ghosts || fPiece is Portals);
 
+
                         // place ghost back on board
                         board.pieces[fPos.Row, fPos.Col] = ghost;
 
                         // remove dungeon ghost
+
+                        board.pieces[fPos.Row, fPos.Col] = ghost;
+
                         board.dungeonGhosts.Remove(ghost);
 
                         board.UpdatePortal(ghost.color);
@@ -251,13 +282,17 @@ namespace Jogo18Ghosts
             // ask player where to move the piece and check for it's validity
             do
             {
+
                 // get coordinates of new position
+
+
                 Console.WriteLine("Where do you want to move it to?");
 
                 auxPosition = Player.GetPosition(board);
                 auxPiece = board.GetPiece(auxPosition);
 
                 // check if the movement is within possible moves
+
                 uint abs1 = (uint)Math.Abs(auxPosition.Row - pos.Row);
                 uint abs2 = (uint)Math.Abs(auxPosition.Col - pos.Col);
 
@@ -265,10 +300,11 @@ namespace Jogo18Ghosts
             }
             while (auxPiece is Portals || !isValidPosition);
 
+
             // if the piece moved to is a ghost
+
             if (auxPiece is Ghosts ghosts)
             {
-                //start battle and check who wins
                 if (((Ghosts)piece).checkWinner(ghosts))
                 {
                     MovePiece(piece, pos, auxPosition);
@@ -276,30 +312,38 @@ namespace Jogo18Ghosts
                 }
                 else
                 {
-                    board.pieces[pos.Row, pos.Col] =
-                        GameBoard.GetBoardSettings(pos);
+                    board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
                     board.OnPieceLost(piece);
                 }
             }
+
             // if moved to mirror
+
             else if (auxPiece is Mirror mirror)
             {
                 BoardPiece auxMirror = null;
                 Position mirrorPos = null;
 
                 uint mirrorCount = board.CountMirrors();
+
                 
                 // if player is in a mirror
+
                 if (mirrorCount > 1)
                 {
                     do
                     {
+
                         // ask what mirror to move to and check validity
                         Console.WriteLine("Which Mirror to teleport to?");
+
+                        Console.WriteLine("Para que espelho que ir?");
+
                         mirrorPos = Player.GetPosition(board);
                         auxMirror = board.GetPiece(mirrorPos);
 
                     } while (!(auxMirror is Mirror));
+
 
                     // setting the new position
                     board.pieces[pos.Row, pos.Col] = 
@@ -307,9 +351,13 @@ namespace Jogo18Ghosts
                     board.pieces[mirrorPos.Row, mirrorPos.Col] = piece;
 
                     // update portal rotation if necessary
+
+                    board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
+                    board.pieces[mirrorPos.Row, mirrorPos.Col] = piece;
+
+
                     board.UpdatePortal(piece.color);
                 }
-            
                 else
                     MovePiece(piece, pos, auxPosition);
             }

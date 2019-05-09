@@ -20,7 +20,7 @@ namespace Jogo18Ghosts
             this.player = player;
         }
 
-        //to check what player has won the game
+        // to check what player has won the game
         abstract internal bool checkWinner(Ghosts ghost);
 
     }
