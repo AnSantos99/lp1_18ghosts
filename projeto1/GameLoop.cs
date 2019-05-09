@@ -3,68 +3,87 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
+    /// <summary>
+    /// this class serves as the main looping system for the game, where
+    /// the rendering function is called to draw on the board until the winning
+    /// condition is met by one of the players
+    /// </summary>
     internal class GameLoop
     {
-
+        //calling other classes to create a new board and check who the current
+        //player is on this turn
         internal static GameBoard board;
         internal static Player currentPlayer;
 
+        /// <summary>
+        /// this method has no return and its purpose is to run the game upon
+        /// being called inside the Program.cs
+        /// </summary>
         internal static void Run()
         {
 
             //allowing the use of UNICODE on the console
             Console.OutputEncoding = Encoding.UTF8;
 
-            //initialising variables related to each class needed
+            //initialising the two players for the loop
             Player player1;
             Player player2;
 
-            //declaring the variables
+            //initialising the game board variable from the GameBoard class
             board = new GameBoard();
 
-
+            //declaring the variables
             player1 = new Player('1');
             player2 = new Player('2');
 
-            player1.ghosts.Add(new YellowGhost(player1));
-            player1.ghosts.Add(new YellowGhost(player1));
-            player1.ghosts.Add(new YellowGhost(player1));
-            player1.ghosts.Add(new BlueGhost(player1));
-            player1.ghosts.Add(new BlueGhost(player1));
-            player1.ghosts.Add(new BlueGhost(player1));
-            player1.ghosts.Add(new RedGhost(player1));
-            player1.ghosts.Add(new RedGhost(player1));
-            player1.ghosts.Add(new RedGhost(player1));
+            //for loop for adding the 9 ghosts to each player's list, 3 of a
+            //different colour each time
+            for (int i = 0; i<3; i++)
+            {
+                //add the 1st player's three colours of ghosts
+                player1.ghosts.Add(new YellowGhost(player1));
+                player1.ghosts.Add(new BlueGhost(player1));
+                player1.ghosts.Add(new RedGhost(player1));
 
-            player2.ghosts.Add(new YellowGhost(player2));
-            player2.ghosts.Add(new YellowGhost(player2));
-            player2.ghosts.Add(new YellowGhost(player2));
-            player2.ghosts.Add(new BlueGhost(player2));
-            player2.ghosts.Add(new BlueGhost(player2));
-            player2.ghosts.Add(new BlueGhost(player2));
-            player2.ghosts.Add(new RedGhost(player2));
-            player2.ghosts.Add(new RedGhost(player2));
-            player2.ghosts.Add(new RedGhost(player2));
+                //add the 2nd player's three colours of ghosts
+                player2.ghosts.Add(new YellowGhost(player2));
+                player2.ghosts.Add(new BlueGhost(player2));
+                player2.ghosts.Add(new RedGhost(player2));
+            }
 
+            //set the current player to player two so we can switch to 1 later
             currentPlayer = player2;
-            bool error = false;
 
+            //in case of incorrect input from the user
+            bool error; 
+            
+            error = false;
+
+            //this cycle is for placing the ghosts on the board before the game
             for (int i = 0; i < 18; i++)
             {
+                //check player number in order to switch
                 if (i != 2 && !error)
                 {
+                    //switch player for the alternating turns placing ghosts
                     if (currentPlayer == player1)
                         currentPlayer = player2;
                     else
                         currentPlayer = player1;
 
                 }
+                //set error to false for next loop
                 error = false;
+                
+                //add ghost to current player
                 Ghosts ghost = currentPlayer.ghosts[i / 2];
+                
+                //clear console for cleaner outputs
+                Console.Clear();
 
-                //Console.Clear();
+                //call the renderer function to draw the board on the console
+                board.Render();
 
-                board.render();
                 Console.WriteLine((ghost.player == player1 ? "player1" : "player2") + ": Place your ghost");
                 Position pos = Player.GetPosition(board);
                 if (board.pieces[pos.Row, pos.Col] is Ghosts || board.pieces[pos.Row, pos.Col].color != ghost.color ||
@@ -93,7 +112,7 @@ namespace Jogo18Ghosts
 
                 Console.Clear();
                 Console.WriteLine(currentPlayer == player1 ? "player1" : "player2");
-                board.render();
+                board.Render();
 
                 Update();
             }
