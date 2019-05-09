@@ -8,8 +8,9 @@ namespace Jogo18Ghosts
     /// </summary>
     sealed internal class Mirror : BoardPiece
     {
+        //creade a method related to the BoardPiece that sets the Mirror
         internal Mirror()
-            : base(Convert.ToString((char)Symbols.mirror), ConsoleColor.White)
+            : base(Convert.ToString((char)Symbols.mirror), ConsoleColor.Gray)
         {
         }
     }

@@ -180,13 +180,13 @@ namespace Jogo18Ghosts
         /// </summary>
         private static void Update()
         {
-            if (board.CountLostSoulsForPlayer(currentPlayer) > 0)
+            if (board.CountdungeonGhostsForPlayer(currentPlayer) > 0)
             {
                 Console.WriteLine("Quer mover ou ressuscitar um fantasma? (R/F)");
                 if (Console.ReadLine().ToUpper() == "R")
                 {
                     Console.WriteLine("Que fantasma que ressuscitar?");
-                    Ghosts ghost = board.GetLostSoul(Console.ReadLine());
+                    Ghosts ghost = board.GetDungeonGhost(Console.ReadLine());
 
                     if (ghost != null)
                     {
@@ -201,7 +201,7 @@ namespace Jogo18Ghosts
                         while (fPiece is Ghosts || fPiece is Portals);
 
                         board.pieces[fPos.Row, fPos.Col] = ghost;
-                        board.lostSouls.Remove(ghost);
+                        board.dungeonGhosts.Remove(ghost);
 
                         board.UpdatePortal(ghost.color);
                     }
@@ -209,20 +209,34 @@ namespace Jogo18Ghosts
                     return;
                 }
             }
-
+           
+            //set the default pieces to null to use and replace them later
             BoardPiece piece = null;
+
+            //get a variable of Position type to simplify use
             Position pos;
+
+            //to ask the player which ghost they want to move and getting it
             do
             {
                 Console.WriteLine("Que fantasma quer mover?");
                 pos = Player.GetPosition(board);
                 piece = board.GetPiece(pos);
             }
+            //do while piece belongs to the player
             while (!(piece is Ghosts ghost && ghost.player == currentPlayer));
 
-            BoardPiece auxPiece = null;
-            Position auxPosition = null;
-            bool isValidPosition = false;
+            //auxiliary piece to check types of corridors that aren't ghosts
+            BoardPiece auxPiece;
+            Position auxPosition; 
+            bool isValidPosition;
+            
+            //declare the new piece's values as null to use for different types
+            auxPiece = null;
+            auxPosition = null;
+            isValidPosition = false;
+
+            //ask player where to move the piece and check for it's validity
             do
             {
                 Console.WriteLine("Where do you want to move it to?");

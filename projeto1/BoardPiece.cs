@@ -2,7 +2,7 @@
 namespace Jogo18Ghosts
 {
     /// <summary>
-    /// This class checks the position of each piece and renders it depending
+    /// this class checks the position of each piece and renders it depending
     /// on the type of piece
     /// </summary>
     internal class BoardPiece
@@ -23,8 +23,8 @@ namespace Jogo18Ghosts
         /// this method gets each piece's type to set it's character and colour
         /// on the board
         /// </summary>
-        /// <param name="prefix"></param>
-        /// <param namC:\Users\nani\Desktop\LP1_Ghosts\LP1_Ghosts\BoardPiece.cse="color"></param>
+        /// <param name="prefix">checks the type of piece</param>
+        /// <param name="color">checks the colour of the piece</param>
         internal BoardPiece(string prefix, ConsoleColor color)
         {
             this.prefix = prefix;
@@ -32,21 +32,25 @@ namespace Jogo18Ghosts
         }
 
         /// <summary>
-        /// this method renders the pieces on the board according to what information
-        /// it gets about the piece type
+        /// this method renders the pieces on the board according to what 
+        /// informatioñ it gets about the piece type
         /// </summary>
-        /// <param name="spaces"></param>
+        /// <param name="spaces">spaces between piece and corridor</param>
         internal virtual void Render(bool spaces = true)
         {
-            ConsoleColor auxColor = Console.ForegroundColor;
+            //gets default console colour
+            ConsoleColor auxColour = Console.ForegroundColor;
 
             Console.ForegroundColor = this.color;
+            
+            //rendering the spaces and piece properly
             if (spaces)
                 Console.Write(" " + prefix + "    ");
             else
                 Console.Write(prefix);
-
-            Console.ForegroundColor = auxColor;
+            
+            //return to default colour for the rest of the board
+            Console.ForegroundColor = auxColour;
         }
     }
 }
