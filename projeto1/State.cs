@@ -1,4 +1,4 @@
-namespace Jogo18Ghosts
+﻿namespace Jogo18Ghosts
 {
     public enum State
     {
