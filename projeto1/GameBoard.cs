@@ -196,7 +196,7 @@ namespace Jogo18Ghosts
 
         }
 
-        internal void render()
+        internal void Render()
         {
             Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
 
