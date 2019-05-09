@@ -4,18 +4,17 @@ using System.Text;
 
 namespace Jogo18Ghosts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GameBoard
-    {
-        private State[,] state;
-        public State NextTurn { get; private set; }
+    {    
         private uint width = 5, height = 5;
         public BoardPiece[,] pieces;
         public List<Ghosts> lostSouls = new List<Ghosts>();
 
         public GameBoard()
         {
-            state = new State[5, 5];
-
             pieces = new BoardPiece[width, height];
             pieces[0, 0] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[0, 1] = new BoardPiece("r", ConsoleColor.Red);
@@ -47,7 +46,7 @@ namespace Jogo18Ghosts
             pieces[4, 3] = new BoardPiece("b", ConsoleColor.Blue);
             pieces[4, 4] = new BoardPiece("y", ConsoleColor.Yellow);
 
-            NextTurn = State.P1;
+            
         }
 
         public static BoardPiece GetBoardSettings(Position pos)
@@ -133,10 +132,7 @@ namespace Jogo18Ghosts
             return null;
         }
 
-        public State GetState(Position position)
-        {
-            return state[position.Row, position.Col];
-        }
+        
 
         public void SetGhost(Ghosts ghost, Position pos)
         {
@@ -186,15 +182,7 @@ namespace Jogo18Ghosts
             return counter;
         }
 
-        public bool SetState(Position position, State newState)
-        {
-            if (newState != NextTurn) return false;
-            //if (state[position.Row, position.Col] != State.Undecided) return false;
-            state[position.Row, position.Col] = newState;
-            SwitchNextTurn();
-            return true;
-        }
-
+        
         public BoardPiece GetPiece(Position pos)
         {
             return pieces[pos.Row, pos.Col];
@@ -309,18 +297,11 @@ namespace Jogo18Ghosts
                                 if (j < width - 1)
                                     CheckPortalNeighbour(portal, j + 1, i);
                                 break;
-
                         }
 
                     }
                 }
             }
-        }
-
-        private void SwitchNextTurn()
-        {
-            if (NextTurn == State.P1) NextTurn = State.P2;
-            else NextTurn = State.P1;
-        }
+        } 
     }
 }
