@@ -9,13 +9,13 @@ namespace Jogo18Ghosts
     /// </summary>
     internal class GameBoard
     {   
-        //set the board size
+        // set the board size
         private uint width = 5, height = 5;
 
-        //initialise the BoardPiece class pieces
+        // initialise the BoardPiece class pieces
         internal BoardPiece[,] pieces;
         
-        //create a list for the player's ghosts
+        // create a list for the player's ghosts
         internal List<Ghosts> dungeonGhosts = new List<Ghosts>();
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Jogo18Ghosts
             // declare the string
             c = Convert.ToString((char)Symbols.Corridor);
 
-            //place pieces on the piece array and set their colour and symbol
+            // place pieces on the piece array and set their colour and symbol
             pieces = new BoardPiece[width, height];
             pieces[0, 0] = new BoardPiece(c, ConsoleColor.Blue);
             pieces[0, 1] = new BoardPiece(c, ConsoleColor.Red);
@@ -73,8 +73,8 @@ namespace Jogo18Ghosts
         /// or null if the position doesn't exist</returns>
         internal static BoardPiece GetBoardSettings(Position pos)
         {
-            //switch case to define each position properly according to it's
-            //row and column 
+            // switch case to define each position properly according to it's
+            // row and column 
             switch (pos.Row)
             {
                 case 0:
@@ -162,10 +162,10 @@ namespace Jogo18Ghosts
         /// <param name="ghost">chosen ghost</param>
         /// <param name="pos">wanted position</param>
         internal void SetGhost(Ghosts ghost, Position pos)
-        {
-            //set the ghost in that position
+        { 
+            // set the ghost in that position
             ghost.pos = pos;
-            //assign that position as a ghost 
+            // assign that position as a ghost 
             pieces[pos.Row, pos.Col] = ghost;
         }
 
@@ -177,10 +177,10 @@ namespace Jogo18Ghosts
         /// <returns>the ghost now in the dungeon</returns>
         internal Ghosts GetDungeonGhost(string position)
         {
-            //convert to upper to avoid errors
+            // convert to upper to avoid errors
             switch (position.ToUpper())
             {
-                //get ghost from the dungeon so it can be placed back on board
+                // get ghost from the dungeon so it can be placed back on board
                 case "A6": return dungeonGhosts[0];
                 case "A7": return dungeonGhosts[5];
                 case "A8": return dungeonGhosts[10];
@@ -217,9 +217,9 @@ namespace Jogo18Ghosts
         /// <returns>the updated counter</returns>
         internal uint CountdungeonGhostsForPlayer(Player player)
         {
-            //starting a counter for the ghosts in the dungeon
+            // starting a counter for the ghosts in the dungeon
             uint counter = 0;
-            //going through every ghost in the dungeon to count it
+            // going through every ghost in the dungeon to count it
             foreach (Ghosts ghost in dungeonGhosts)
                 if (ghost.player == player)
                     counter++;
@@ -245,36 +245,36 @@ namespace Jogo18Ghosts
         /// </summary>
         internal void Render()
         {
-            //print the top row
+            // print the top row
             Console.WriteLine("  __[A]_|_[B]_|_[C]_|_[D]_|_[E]__");
 
-            //begin cycle to set all the rows right
+            // begin cycle to set all the rows right
             for (uint y = 0; y < height; y++)
             {
                 
                 Console.WriteLine("  |     |     |     |     |     |");
                 Console.Write($"[{y + 1}] ");
 
-                //check if there are pieces and place them
+                // check if there are pieces and place them
                 for (uint x = 0; x < width; x++)
                 {
                     if (pieces[y, x] != null)
                         pieces[y, x].Render();
                 }
                 
-                //new line to render bottom of row
+                // new line to render bottom of row
                 Console.WriteLine();
                 Console.WriteLine("  |__ __|__ __|__ __|__ __|__ __|");
             }
            
-            //print the dungeon
+            // print the dungeon
             Console.WriteLine("  |                             |");
             Console.Write("6 |");
 
-            //simulating coordinates outside of normal board for
+            // simulating coordinates outside of normal board for
             uint counter = 0, uCounter = 6;
             
-            //checking ghosts inside dungeon and rendering it
+            // checking ghosts inside dungeon and rendering it
             foreach (Ghosts soul in dungeonGhosts)
             {
                 soul.Render();
@@ -288,7 +288,7 @@ namespace Jogo18Ghosts
                 }
             }
 
-            //printing bottom of dungeon
+            // printing bottom of dungeon
             Console.WriteLine();
             Console.WriteLine("  |_____________________________|");
         }
@@ -305,11 +305,11 @@ namespace Jogo18Ghosts
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    //finds the portal with the colour that matches the ghost
+                    // finds the portal with the colour that matches the ghost
                     if (pieces[i, j] is Portals portal && 
                         portal.color == piece.color)
                     {
-                        //rotates the portal
+                        // rotates the portal
                         portal.Turn();
                         UpdatePortal(portal.color);
                         break;
@@ -317,7 +317,7 @@ namespace Jogo18Ghosts
                 }
             }
 
-            //checks the ghost that lost and sends it to the dungeon
+            // checks the ghost that lost and sends it to the dungeon
             if (piece is Ghosts ghost)
                 dungeonGhosts.Add(ghost);
         }
@@ -350,12 +350,12 @@ namespace Jogo18Ghosts
         /// <param name="y">the y axis from board</param>
         private void CheckPortalNeighbour(Portals portal, int x, int y)
         {
-            //checks if piece is a ghost matching the portal colour
+            // checks if piece is a ghost matching the portal colour
             if (pieces[y, x] is Ghosts ghost && ghost.color == portal.color)
             {
-                //adds ghost to the free ghost list
+                // adds ghost to the free ghost list
                 ghost.player.ghostsFree.Add((Ghosts)pieces[y, x]);
-                //returns corridor back to its original empty colour state
+                // returns corridor back to its original empty colour state
                 pieces[y, x] = GetBoardSettings(new Position(y, x));
             }
         }
@@ -371,10 +371,10 @@ namespace Jogo18Ghosts
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    //checks if the piece is a portal and it matches the color
+                    // checks if the piece is a portal and it matches the color
                     if (pieces[i, j] is Portals portal && portal.color == color)
                     {
-                        //checking the neighbours according to the facing dir
+                        // checking the neighbours according to the facing dir
                         switch (portal.dir)
                         {
                             case Direction.up:

@@ -10,7 +10,7 @@ namespace Jogo18Ghosts
 
     internal class Portals : BoardPiece
     {
-        //setting the default direction as up from the Direction enum
+        // setting the default direction as up from the Direction enum
         internal Direction dir = Direction.up;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Jogo18Ghosts
         /// </summary>
         internal void Turn()
         {
-            //switch receives the direction the portal currently faces
+            // switch receives the direction the portal currently faces
             switch (dir)
             {
                 case Direction.up:
@@ -53,12 +53,12 @@ namespace Jogo18Ghosts
         /// <param name="spaces"> spaces between corridor and portal</param>
         internal override void Render(bool spaces = true)
         {
-            //getting the default colour
+            // getting the default colour
             ConsoleColor auxColor = Console.ForegroundColor;
 
             Console.ForegroundColor = this.color;
 
-            //checking the direction the portal is facing to render correctly
+            // checking the direction the portal is facing to render correctly
             switch (dir)
             {
                 case Direction.up:
@@ -75,13 +75,13 @@ namespace Jogo18Ghosts
                     break;
             }
 
-            //render the spaces for cleaner output
+            // render the spaces for cleaner output
             if (spaces)
                 Console.Write(" " + prefix + "    ");
             else
                 Console.Write(prefix);
 
-            //return to printing the base colour
+            // return to printing the base colour
             Console.ForegroundColor = auxColor;
         }
     }

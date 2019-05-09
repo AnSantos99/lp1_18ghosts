@@ -9,10 +9,10 @@ namespace Jogo18Ghosts
     /// </summary>
     internal class Player
     {
-        //char to tell whose player the ghost belongs to
+        // char to tell whose player the ghost belongs to
         internal char prefix;
 
-        //lists of ghosts for the board and ghosts that have left the board
+        // lists of ghosts for the board and ghosts that have left the board
         internal List<Ghosts> ghosts = new List<Ghosts>();
         internal List<Ghosts> ghostsFree = new List<Ghosts>();
 
@@ -28,12 +28,12 @@ namespace Jogo18Ghosts
         // getting player position from their input to place each ghost
         internal static Position GetPosition(GameBoard board)
         {
-            //getting input
+            // getting input
             string position = Console.ReadLine();
-            //converting input to uppercase to avoid errors
+            // converting input to uppercase to avoid errors
             position = position.ToUpper();
 
-            //calling function to determine which position matches the input
+            // calling function to determine which position matches the input
             Position desiredCoordinate = PositionForNumber(position);
             return desiredCoordinate;
         }

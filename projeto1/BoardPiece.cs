@@ -38,18 +38,18 @@ namespace Jogo18Ghosts
         /// <param name="spaces">spaces between piece and corridor</param>
         internal virtual void Render(bool spaces = true)
         {
-            //gets default console colour
+            // gets default console colour
             ConsoleColor auxColour = Console.ForegroundColor;
 
             Console.ForegroundColor = this.color;
             
-            //rendering the spaces and piece properly
+            // rendering the spaces and piece properly
             if (spaces)
                 Console.Write(" " + prefix + "    ");
             else
                 Console.Write(prefix);
             
-            //return to default colour for the rest of the board
+            // return to default colour for the rest of the board
             Console.ForegroundColor = auxColour;
         }
     }
