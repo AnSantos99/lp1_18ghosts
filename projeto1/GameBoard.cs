@@ -9,13 +9,13 @@ namespace Jogo18Ghosts
     /// </summary>
     internal class GameBoard
     {   
-        //set the board size
+        // set the board size
         private uint width = 5, height = 5;
 
-        //initialise the BoardPiece class pieces
+        // initialise the BoardPiece class pieces
         internal BoardPiece[,] pieces;
         
-        //create a list for the player's ghosts
+        // create a list for the player's ghosts
         internal List<Ghosts> dungeonGhosts = new List<Ghosts>();
 
         /// <summary>
@@ -162,7 +162,11 @@ namespace Jogo18Ghosts
         /// <param name="ghost">chosen ghost</param>
         /// <param name="pos">wanted position</param>
         internal void SetGhost(Ghosts ghost, Position pos)
+
+        { 
+=======
         {
+
             // set the ghost in that position
             ghost.pos = pos;
             // assign that position as a ghost 
