@@ -11,10 +11,10 @@ namespace Jogo18Ghosts
     {
         private static void Main(string[] args)
         {
-            //allowing the use of UNICODE on the console
+            // allowing the use of UNICODE on the console
             Console.OutputEncoding = Encoding.UTF8;
 
-            //call the GameLoop class to run the game
+            // call the GameLoop class to run the game
             GameLoop.Run();
 
         }

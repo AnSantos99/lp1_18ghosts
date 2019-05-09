@@ -8,7 +8,7 @@ namespace Jogo18Ghosts
     /// </summary>
     abstract internal class Ghosts : BoardPiece 
     {
-        //calling the Player class
+        // calling the Player class
         internal Player player;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Jogo18Ghosts
             this.player = player;
         }
 
-        //to check what player has won the game
+        // to check what player has won the game
         abstract internal bool checkWinner(Ghosts ghost);
 
     }
@@ -48,19 +48,19 @@ namespace Jogo18Ghosts
         /// <param name="spaces">spaces between ghost and corridor</param>
         internal override void Render(bool spaces = true)
         {
-            //get the default colour
+            // get the default colour
             ConsoleColor auxColour = Console.ForegroundColor;
 
-            //set the colour to yellow for the ghost
+            // set the colour to yellow for the ghost
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            //place the ghost or the spaces
+            // place the ghost or the spaces
             if (spaces)
                 Console.Write(" " + (char)Symbols.ghost + player.prefix + "   ");
             else
                 Console.Write("Y" + player.prefix);
 
-            //change back to the default colour
+            // change back to the default colour
             Console.ForegroundColor = auxColour;
         }
 
