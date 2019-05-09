@@ -322,6 +322,10 @@ namespace Jogo18Ghosts
                 dungeonGhosts.Add(ghost);
         }
 
+        /// <summary>
+        /// this method counts the mirrors on the board
+        /// </summary>
+        /// <returns>returns number of mirrors</returns>
         internal uint CountMirrors()
         {
             uint count = 0;
@@ -337,24 +341,40 @@ namespace Jogo18Ghosts
             return count;
         }
 
+        /// <summary>
+        /// this method checks to see if a ghost is next to and facing 
+        /// an open portal so it can escape
+        /// </summary>
+        /// <param name="portal">portal on the board position</param>
+        /// <param name="x">the x axis from board</param>
+        /// <param name="y">the y axis from board</param>
         private void CheckPortalNeighbour(Portals portal, int x, int y)
         {
+            //checks if piece is a ghost matching the portal colour
             if (pieces[y, x] is Ghosts ghost && ghost.color == portal.color)
             {
+                //adds ghost to the free ghost list
                 ghost.player.ghostsFree.Add((Ghosts)pieces[y, x]);
+                //returns corridor back to its original empty colour state
                 pieces[y, x] = GetBoardSettings(new Position(y, x));
             }
         }
 
+        /// <summary>
+        /// this method updates the portals by checking what ghosts are near
+        /// them to see if they are facing them
+        /// </summary>
+        /// <param name="color"></param>
         internal void UpdatePortal(ConsoleColor color)
         {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
+                    //checks if the piece is a portal and it matches the color
                     if (pieces[i, j] is Portals portal && portal.color == color)
                     {
-
+                        //checking the neighbours according to the facing dir
                         switch (portal.dir)
                         {
                             case Direction.up:
