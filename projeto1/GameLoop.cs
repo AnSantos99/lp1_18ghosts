@@ -6,26 +6,25 @@ namespace Jogo18Ghosts
     internal class GameLoop
     {
 
-        public static GameBoard board;
-        public static PlayerFix currentPlayer;
+        internal static GameBoard board;
+        internal static Player currentPlayer;
 
-        public static void Run()
+        internal static void Run()
         {
 
             //allowing the use of UNICODE on the console
             Console.OutputEncoding = Encoding.UTF8;
 
             //initialising variables related to each class needed
-            PlayerFix player1;
-            PlayerFix player2;
-
+            Player player1;
+            Player player2;
 
             //declaring the variables
             board = new GameBoard();
 
 
-            player1 = new PlayerFix('1');
-            player2 = new PlayerFix('2');
+            player1 = new Player('1');
+            player2 = new Player('2');
 
             player1.ghosts.Add(new YellowGhost(player1));
             player1.ghosts.Add(new YellowGhost(player1));
@@ -67,7 +66,7 @@ namespace Jogo18Ghosts
 
                 board.render();
                 Console.WriteLine((ghost.player == player1 ? "player1" : "player2") + ": Place your ghost");
-                Position pos = PlayerFix.GetPosition(board);
+                Position pos = Player.GetPosition(board);
                 if (board.pieces[pos.Row, pos.Col] is Ghosts || board.pieces[pos.Row, pos.Col].color != ghost.color ||
                     board.pieces[pos.Row, pos.Col] is Portals)
                 {
@@ -136,7 +135,7 @@ namespace Jogo18Ghosts
                         do
                         {
                             Console.WriteLine("Que posição quer por o fantasma?");
-                            fPos = PlayerFix.GetPosition(board);
+                            fPos = Player.GetPosition(board);
                             fPiece = board.GetPiece(fPos);
                         }
                         while (fPiece is Ghosts || fPiece is Portals);
@@ -156,7 +155,7 @@ namespace Jogo18Ghosts
             do
             {
                 Console.WriteLine("Que fantasma quer mover?");
-                pos = PlayerFix.GetPosition(board);
+                pos = Player.GetPosition(board);
                 piece = board.GetPiece(pos);
             }
             while (!(piece is Ghosts ghost && ghost.player == currentPlayer));
@@ -168,7 +167,7 @@ namespace Jogo18Ghosts
             {
                 Console.WriteLine("Where do you want to move it to?");
 
-                auxPosition = PlayerFix.GetPosition(board);
+                auxPosition = Player.GetPosition(board);
                 auxPiece = board.GetPiece(auxPosition);
 
                 uint abs1 = (uint)Math.Abs(auxPosition.Row - pos.Row);
@@ -202,7 +201,7 @@ namespace Jogo18Ghosts
                     do
                     {
                         Console.WriteLine("Para que espelho que ir?");
-                        mirrorPos = PlayerFix.GetPosition(board);
+                        mirrorPos = Player.GetPosition(board);
                         auxMirror = board.GetPiece(mirrorPos);
 
                     } while (!(auxMirror is Mirror));
@@ -218,7 +217,5 @@ namespace Jogo18Ghosts
             else
                 MovePiece(piece, pos, auxPosition);
         }
-
-
     }
 }

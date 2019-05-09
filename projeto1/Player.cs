@@ -7,19 +7,19 @@ namespace Jogo18Ghosts
     /// this class is used to set the players' info, giving them a list of ghosts
     /// that they have, ghosts they've set free
     /// </summary>
-    public class PlayerFix
+    internal class Player
     {
-        public char prefix;
-        public List<Ghosts> ghosts = new List<Ghosts>();
-        public List<Ghosts> ghostsFree = new List<Ghosts>();
+        internal char prefix;
+        internal List<Ghosts> ghosts = new List<Ghosts>();
+        internal List<Ghosts> ghostsFree = new List<Ghosts>();
 
-        public PlayerFix(char prefix)
+        internal Player(char prefix)
         {
             this.prefix = prefix;
         }
 
         // getting player position from their input to place each ghost
-        public static Position GetPosition(GameBoard board)
+        internal static Position GetPosition(GameBoard board)
         {
             //getting input
             string position = Console.ReadLine();
@@ -31,7 +31,7 @@ namespace Jogo18Ghosts
             return desiredCoordinate;
         }
 
-        public bool Won()
+        internal bool Won()
         {
             uint y = 0, b = 0, r = 0;
 

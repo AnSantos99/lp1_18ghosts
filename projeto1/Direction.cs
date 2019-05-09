@@ -1,12 +1,11 @@
 using System;
 namespace Jogo18Ghosts
 {
-    public enum Direction
+    internal enum Direction
     {
         up,
         down,
         left,
         right
     }
-
 }
