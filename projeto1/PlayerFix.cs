@@ -1,18 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Jogo18Ghosts
 {
-    /// <summary>
-    /// this class is used to set the players' info, giving them a list of ghosts
-    /// that they have, ghosts they've set free
-    /// </summary>
     public class PlayerFix
     {
         public char prefix;
         public List<Ghosts> ghosts = new List<Ghosts>();
-        public List<Ghosts> ghostsFree = new List<Ghosts>();
 
         public PlayerFix(char prefix)
         {
@@ -26,35 +20,12 @@ namespace Jogo18Ghosts
             string position = Console.ReadLine();
             //converting input to uppercase to avoid errors
             position = position.ToUpper();
-
             //calling function to determine which position matches the input
             Position desiredCoordinate = PositionForNumber(position);
             return desiredCoordinate;
         }
 
-        public bool Won()
-        {
-            uint y = 0, b = 0, r = 0;
-
-            foreach (Ghosts g in ghostsFree)
-            {
-                if (g is YellowGhost)
-                    y++;
-                else if (g is BlueGhost)
-                    b++;
-                else if (g is RedGhost)
-                    r++;
-            }
-
-            return y > 0 && b > 0 && r > 0;
-        }
-
-        /// <summary>
-        /// this method receives the input of position the player has given and
-        /// returns it on the board so each ghost can be set and rendered
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
+        //determining what position on the board matches the player input
         private static Position PositionForNumber(string position)
         {
             switch (position)
@@ -88,7 +59,6 @@ namespace Jogo18Ghosts
                 case "E3": return new Position(2, 4);
                 case "E4": return new Position(3, 4);
                 case "E5": return new Position(4, 4);
-
                 case "Q":
 
                 default: return null;

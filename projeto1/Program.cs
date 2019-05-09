@@ -5,7 +5,13 @@ namespace Jogo18Ghosts
 {
     internal class Program
     {
+        private enum GameState
+        {
+            moving
+        }
+
         static GameBoard board;
+        static GameState gameState = GameState.moving;
         static PlayerFix currentPlayer;
 
         private static void Main(string[] args)
@@ -14,13 +20,16 @@ namespace Jogo18Ghosts
             Console.OutputEncoding = Encoding.UTF8;
 
             //initialising variables related to each class needed
+
+            WinChecker winChecker;
+
             PlayerFix player1;
             PlayerFix player2;
 
 
             //declaring the variables
             board = new GameBoard();
-
+            winChecker = new WinChecker();
 
             player1 = new PlayerFix('1');
             player2 = new PlayerFix('2');
@@ -61,7 +70,7 @@ namespace Jogo18Ghosts
                 error = false;
                 Ghosts ghost = currentPlayer.ghosts[i / 2];
 
-                //Console.Clear();
+                Console.Clear();
 
                 board.render();
                 Console.WriteLine((ghost.player == player1 ? "player1" : "player2") + ": Place your ghost");
@@ -80,7 +89,6 @@ namespace Jogo18Ghosts
             }
 
             currentPlayer = player2;
-
             //initializing the game cycle until a player has won or quit the game
             do
             {
@@ -95,125 +103,66 @@ namespace Jogo18Ghosts
                 board.render();
 
                 Update();
+
+
             }
 
             //run while noone has won nor tied
-            while (!player1.Won() && !player2.Won());
+            while ((!winChecker.IsDraw(board) && winChecker.Check(board) == State.Undecided));
 
-            if (player1.Won())
-                Console.WriteLine("Player 1 Has WON!!");
-            else if (player2.Won())
-                Console.WriteLine("Player 2 Has WON!!");
-
-            Console.ReadKey();
-        }
-
-        private static void MovePiece(BoardPiece piece, Position newPos, Position oldPos)
-        {
-            board.pieces[newPos.Row, newPos.Col] = GameBoard.GetBoardSettings(newPos);
-            board.pieces[oldPos.Row, oldPos.Col] = piece;
-
-            board.UpdatePortal(piece.color);
+            board.render();
         }
 
         private static void Update()
         {
-            if (board.CountLostSoulsForPlayer(currentPlayer) > 0)
+            switch (gameState)
             {
-                Console.WriteLine("Quer mover ou ressuscitar um fantasma? (R/F)");
-                if (Console.ReadLine().ToUpper() == "R")
-                {
-                    Console.WriteLine("Que fantasma que ressuscitar?");
-                    Ghosts ghost = board.GetLostSoul(Console.ReadLine());
-
-                    if (ghost != null)
-                    {
-                        BoardPiece fPiece = null;
-                        Position fPos = null;
-                        do
-                        {
-                            Console.WriteLine("Que posição quer por o fantasma?");
-                            fPos = PlayerFix.GetPosition(board);
-                            fPiece = board.GetPiece(fPos);
-                        }
-                        while (fPiece is Ghosts || fPiece is Portals);
-
-                        board.pieces[fPos.Row, fPos.Col] = ghost;
-                        board.lostSouls.Remove(ghost);
-
-                        board.UpdatePortal(ghost.color);
-                    }
-
-                    return;
-                }
-            }
-
-            BoardPiece piece = null;
-            Position pos;
-            do
-            {
-                Console.WriteLine("Que fantasma quer mover?");
-                pos = PlayerFix.GetPosition(board);
-                piece = board.GetPiece(pos);
-            }
-            while (!(piece is Ghosts ghost && ghost.player == currentPlayer));
-
-            BoardPiece auxPiece = null;
-            Position auxPosition = null;
-            bool isValidPosition = false;
-            do
-            {
-                Console.WriteLine("Where do you want to move it to?");
-
-                auxPosition = PlayerFix.GetPosition(board);
-                auxPiece = board.GetPiece(auxPosition);
-
-                uint abs1 = (uint)Math.Abs(auxPosition.Row - pos.Row);
-                uint abs2 = (uint)Math.Abs(auxPosition.Col - pos.Col);
-
-                isValidPosition = (abs1 <= 1 && abs2 <= 1 && abs1 + abs2 <= 1);
-            }
-            while (auxPiece is Portals || !isValidPosition);
-
-            if (auxPiece is Ghosts ghosts)
-            {
-                if (((Ghosts)piece).checkWinner(ghosts))
-                {
-                    MovePiece(piece, pos, auxPosition);
-                    board.OnPieceLost(auxPiece);
-                }
-                else
-                {
-                    board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
-                    board.OnPieceLost(piece);
-                }
-            }
-            else if (auxPiece is Mirror mirror)
-            {
-                BoardPiece auxMirror = null;
-                Position mirrorPos = null;
-
-                uint mirrorCount = board.CountMirrors();
-                if (mirrorCount > 1)
-                {
+                case GameState.moving:
+                    BoardPiece piece = null;
+                    Position pos;
                     do
                     {
-                        Console.WriteLine("Para que espelho que ir?");
-                        mirrorPos = PlayerFix.GetPosition(board);
-                        auxMirror = board.GetPiece(mirrorPos);
+                        Console.WriteLine("Que fantasma quer mover?");
+                        pos = PlayerFix.GetPosition(board);
+                        piece = board.GetPiece(pos);
+                    }
+                    while (!(piece is Ghosts ghost && ghost.player == currentPlayer));
 
-                    } while (!(auxMirror is Mirror));
+                    BoardPiece auxPiece = null;
+                    Position auxPosition = null;
+                    bool isValidPosition = false;
+                    do
+                    {
+                        Console.WriteLine("Where do you want to move it to?");
 
-                    board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
-                    board.pieces[mirrorPos.Row, mirrorPos.Col] = piece;
+                        auxPosition = PlayerFix.GetPosition(board);
+                        auxPiece = board.GetPiece(auxPosition);
 
-                    board.UpdatePortal(piece.color);
-                }
-                else
-                    MovePiece(piece, pos, auxPosition);
+                        isValidPosition = (Math.Abs(auxPosition.Row - pos.Row) <= 1 && Math.Abs(auxPosition.Col - pos.Col) <= 1);
+                    }
+                    while (auxPiece is Portals || !isValidPosition);
+
+                    if (auxPiece is Ghosts ghosts)
+                    {
+                        if (((Ghosts)piece).checkWinner(ghosts))
+                        {
+                            board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
+                            board.pieces[auxPosition.Row, auxPosition.Col] = piece;
+
+                        }
+
+                        else
+                        {
+                            board.pieces[pos.Row, pos.Col] = GameBoard.GetBoardSettings(pos);
+                        }
+                    }
+
+
+
+
+
+                    break;
             }
-            else
-                MovePiece(piece, pos, auxPosition);
         }
     }
 }
