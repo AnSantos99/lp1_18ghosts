@@ -53,9 +53,7 @@ It was possible to deepen our knowledge about the usage of different variable ty
 
 ## References
 
-Book Whitaker, R. B. (2016). <br />The C# Player's Guide (3rd Edition). Starbound Software. page 123
-http://www.codinghomework.com/c-program-almost-chess-part-18-introduction-project/ <br /><br />
-Book Whitaker, R. B. (2016). The C# Player's Guide (3rd Edition). Starbound Software. page 123
-http://www.codinghomework.com/c-program-almost-chess-part-18-introduction-project/
+Book Whitaker, R. B. (2016). <br />The C# Player's Guide (3rd Edition). Starbound Software. page 123<br />
+http://www.codinghomework.com/c-program-almost-chess-part-18-introduction-project/ <br />
 Code was developed with the help of our colleague: **João Moreira - 21801608**, who is not currently doing this UC, but is knowledgeable in the field and was able to help guide us in the right direction with our program
 There were idea exchanges with some of the other groups doing the project
