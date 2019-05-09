@@ -47,8 +47,6 @@ There is an enum for the board symbols and another one for the portal directions
 
 To conclude it’s relevant to emphasize the importance of creating this project in the applied consolidation of the knowledge acquired during the c# lectures in a real situation.<br />
 
-To conclude it’s relevant to emphasize the importance of creating this project in the applied consolidation of the knowledge acquired during the c# lectures in a real situation.
-
 It was possible to deepen our knowledge about the usage of different variable types, Enums, Classes, Methods and training the use of good practices within the creation of code, commenting and organizing everything according to the needs that came along developing the project.
 
 ## References
