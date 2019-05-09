@@ -1,28 +1,25 @@
-namespace Jogo18Ghosts
+﻿public enum State
 {
-    public enum State
-    {
-        Undecided,
+    Undecided,
 
-        P1,
-        P2,
+    P1,
+    P2,
 
-        YellowCorridor = 'y',
-        BlueCorridor = 'b',
-        RedCorridor = 'r',
+    YellowCorridor = 'y',
+    BlueCorridor = 'b',
+    RedCorridor = 'r',
 
-        YellowPortal = 'Y',
-        BluePortal = 'B',
-        RedPortal = 'R',
+    YellowPortal = 'Y',
+    BluePortal = 'B',
+    RedPortal = 'R',
 
-        Mirror = 'M',
+    Mirror = 'M',
 
-        RedGhostsP1 = 'a',
-        BlueGhostsP1 = 'b',
-        YellowGhostsP1 = 'c',
+    RedGhostsP1 = 'a',
+    BlueGhostsP1 = 'b',
+    YellowGhostsP1 = 'c',
 
-        RedGhostsP2 = 'A',
-        BlueGhostsP2 = 'B',
-        YellowGhostsP2 = 'C'
-    };
-}
+    RedGhostsP2 = 'A',
+    BlueGhostsP2 = 'B',
+    YellowGhostsP2 = 'C'
+};
